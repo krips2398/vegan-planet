@@ -4,6 +4,8 @@
 library(dplyr)
 library(naniar)
 library(mi)
+library(ggplot2)
+library(forcats)
 ```
 
 ```{r fig.width=7, fig.height=5}
@@ -49,7 +51,7 @@ missing_counts <- dat %>% group_by(city) %>% summarise_all(~sum(is.na(.))) %>% t
 ```
 
 ```{r fig.width=15, fig.height=20}
-ggplot(data=missing_counts, aes(x=city, y=sumNA)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25))
+ggplot(data=missing_counts, aes(x=fct_reorder(city,-sumNA), y=sumNA)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25))
 ```
 
 ```{r}

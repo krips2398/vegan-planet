@@ -2,6 +2,8 @@ introduction
 data-sources
 data-transformation
 missing-values
+missing-by-borough
+number-missing-by-city
 results
 interactive-component
 conclusion
