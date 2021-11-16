@@ -1,1 +1,58 @@
 # Missing values
+
+```{r}
+library(dplyr)
+library(naniar)
+library(mi)
+```
+
+```{r fig.width=7, fig.height=5}
+#df <- read.csv("/Users/saikrupa/Desktop/projects_in_R/data/vegetarian_restaurants_US_datafiniti.csv")
+df <- read.csv("/Users/saikrupa/Desktop/projects_in_R/data/Datafiniti_Vegetarian_and_Vegan_Restaurants.csv")
+dat <- df %>% mutate_all(na_if,"")
+vis_miss(dat)
+```
+
+```{r}
+colSums(is.na(dat)) %>% sort(decreasing = TRUE)
+```
+
+```{r}
+x <- missing_data.frame(dat)
+image(x)
+#summary(x@patterns)
+```
+
+```{r}
+summary(x@patterns)
+```
+
+#### Missing by borough
+```{r}
+df_b <- dat %>% mutate(Borough = city)
+percent_missing <- df_b %>% group_by(Borough) %>% summarize(num_restaurants = n(), num_na_claimed = sum(is.na(`claimed`))) %>% mutate(percent_na = round(num_na_claimed/num_restaurants, 2)) %>% arrange(-percent_na)
+percent_missing
+```
+```{r}
+df_b <- dat %>% mutate(Borough = city)
+percent_missing <- df_b %>% group_by(Borough) %>% summarize(num_restaurants = n(), num_na_menus_currency = sum(is.na(`menus.currency`))) %>% mutate(percent_na = round(num_na_menus_currency/num_restaurants, 2)) %>% arrange(-percent_na)
+percent_missing
+```
+```{r}
+unique(dat$city)
+```
+
+#### Number missing by city
+
+```{r}
+missing_counts <- dat %>% group_by(city) %>% summarise_all(~sum(is.na(.))) %>% transmute(city, sumNA = rowSums(.[-1]))
+```
+
+```{r fig.width=15, fig.height=20}
+ggplot(data=missing_counts, aes(x=city, y=sumNA)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25))
+```
+
+```{r}
+
+```
+
