@@ -147,7 +147,7 @@ data.missing <- function(df, percent = 'FALSE'){
     scale_fill_brewer(palette = "Blues") +
     xlab("variable name") +
     ylab("missing data pattern") +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 20), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 20), axis.title.y
+    theme(legend.position = "none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 20), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 20), axis.title.y
           =element_text(size = 20), axis.title.x =      element_text(size = 20))
     #{if(tidycars$miss3 == complete_case_id) geom_text(data = tidycars,
                                                       #aes(label = "complete cases"))}
@@ -203,3 +203,6 @@ data.missing(df, percent = FALSE)
 data.missing(df, percent = TRUE)
 
 ```
+Observations:
+* Based on the resulting maps of missing data, we can note there may be a possibility of there being correlations between the first 9 variables listed on the map, as these variables all seem to have missing data within the same rows. 
+* 100% of the rows within these variables also appear to be missing.
