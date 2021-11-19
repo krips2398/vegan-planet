@@ -66,3 +66,8 @@ ggplot(data=missing_counts, aes(x=fct_reorder(city,-sumNA), y=sumNA)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 25), axis.title.y =element_text(size = 25), axis.title.x =      element_text(size = 25))
 ```
 
+#### Applying data.missing function to project data
+```{r}
+data.missing(df, percent = FALSE)
+data.missing(df, percent = TRUE)
+```
