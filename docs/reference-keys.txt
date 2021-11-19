@@ -4,6 +4,8 @@ data-transformation
 missing-values
 missing-by-borough
 number-missing-by-city
+function-for-examining-missing-data
+applying-data.missing-function-to-data
 results
 interactive-component
 conclusion
