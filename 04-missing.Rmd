@@ -76,7 +76,7 @@ ggplot(data=missing_counts, aes(x=fct_reorder(city,-sumNA), y=sumNA)) +
 ```
 *Observations:*
 
-** We examined missing data by city, and interestingly enough, the stark majority of the missing data counts are those from New York City. 
+** We examined missing data by city, and interestingly enough, the majority of the missing data counts are those from New York City. 
 
 **Observations from Brooklyn have the second most highest number of missing data. 
 
