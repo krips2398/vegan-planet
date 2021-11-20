@@ -1,5 +1,5 @@
 --- 
-title: "Vegan Planet"
+title: "Plant-Based Dining Trends"
 author: "Sai Krupa Jangala, Kailande Cassamajor"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
