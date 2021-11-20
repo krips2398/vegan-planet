@@ -22,7 +22,9 @@ vis_miss(dat, sort_miss = TRUE, warn_large_data = FALSE) +
   labs(title = "") +
   xlab("")
 ```
+*Observations:*
 
+** 38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.
 ```{r}
 colSums(is.na(dat)) %>% sort(decreasing = TRUE)
 ```
@@ -32,6 +34,9 @@ x <- missing_data.frame(dat)
 image(x = x)
 #summary(x@patterns)
 ```
+*Observations:*
+
+** All of the missing observations observed are from 12 main variables as presented from the map above. 
 
 ```{r}
 #summary(x@patterns)
@@ -69,6 +74,11 @@ ggplot(data=missing_counts, aes(x=fct_reorder(city,-sumNA), y=sumNA)) +
   ylab("Missing count") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 25), axis.title.y =element_text(size = 25), axis.title.x =      element_text(size = 25))
 ```
+*Observations:*
+
+** We examined missing data by city, and interestingly enough, the stark majority of the missing data counts are those from New York City. 
+
+**Observations from Brooklyn have the second most highest number of missing data. 
 
 #### Function for examining missing data 
 
