@@ -102,12 +102,12 @@ missing_patterns_new <- missing_patterns_new %>%
 
 #Creates a first identification column for each number of rows. there are 9 rows
 # This is the final dataframe needed for the entire map
-missing_patterns_new <- missing_patterns_new %>% rownames_to_column("id")
-missing_patterns_new$id <- as.factor(as.integer(missing_patterns_new$id))
+missing_patterns_new <- missing_patterns_new %>% rownames_to_column("id1")
+missing_patterns_new$id1 <- as.factor(as.integer(missing_patterns_new$id1))
 
 if(percent){
   missing_patterns$count = missing_patterns$count*100/nrow(df)
-  p1 <- ggplot(data=missing_patterns_new,aes(x=fct_rev(reorder(id,-count)),y=count)) + 
+  p1 <- ggplot(data=missing_patterns_new,aes(x=fct_rev(reorder(id,1-count)),y=count)) + 
               geom_bar(aes(alpha=factor(missing_patterns_new$pattern_id)),stat = 'identity',fill = "#03b1fc") + 
               
               xlab("") + ylab("% rows") +
@@ -120,7 +120,7 @@ if(percent){
 }
 else
 {
-p1 <- ggplot(data=missing_patterns_new,aes(x=fct_rev(reorder(id,-count)),y=count)) + 
+p1 <- ggplot(data=missing_patterns_new,aes(x=fct_rev(reorder(id1,-count)),y=count)) + 
               geom_bar(aes(alpha=factor(missing_patterns_new$pattern_id)),stat = 'identity',fill = "#03b1fc") + 
               xlab("") + ylab("row count") +
               scale_alpha_manual(values = c("0.5"=0.5,"1.0"=1), guide="none") +
@@ -133,7 +133,7 @@ p1 <- ggplot(data=missing_patterns_new,aes(x=fct_rev(reorder(id,-count)),y=count
 
 complete_case_id <- missing_patterns_new %>% 
   filter(pattern_id == 1) %>% 
-  select(id) %>% 
+  select(id1) %>% 
   as.character()
 
 missing_col <- df %>% select(everything()) %>%
@@ -181,19 +181,19 @@ missing_map <- data.frame(is.na(df)) %>%
 missing_map <- subset(missing_map, select = -c(count))
 
 tidycars <- missing_map %>% 
-  rownames_to_column("id") %>% 
-  gather(key, value, -id) %>% #gather key and value except id
+  rownames_to_column("id1") %>% 
+  gather(key, value, -id1) %>% #gather key and value except id
   mutate(missing = ifelse(value==1, "yes", "no"))
 
 tidycars <- tidycars %>% mutate(miss2=ifelse(missing=="yes",1,0))
 
-tidycars$miss3 <- as.factor(ifelse(tidycars$id == complete_case_id,0.5,tidycars$miss2))
+tidycars$miss3 <- as.factor(ifelse(tidycars$id1 == complete_case_id,0.5,tidycars$miss2))
 
 tidycars$key <- factor(tidycars$key, levels = levels(miss_col$col))
-tidycars$id <- factor(tidycars$id, levels = levels(missing_patterns_new$id))
+tidycars$id1 <- factor(tidycars$id1, levels = levels(missing_patterns_new$id))
 
 if(complete_case_id == 0) {
-g <- ggplot(tidycars, aes(x = key, y = fct_rev(id), fill = miss3)) +
+g <- ggplot(tidycars, aes(x = key, y = fct_rev(id1), fill = miss3)) +
       geom_tile(color = "white") +
       #scale_fill_brewer(palette = "Blues") +
       scale_fill_manual(values=c("#cacaca","#b2a0e1","darkgray")) +
@@ -206,7 +206,7 @@ g <- ggplot(tidycars, aes(x = key, y = fct_rev(id), fill = miss3)) +
 }
 
 else{
-  g <- ggplot(tidycars, aes(x = key, y = fct_rev(id), fill = miss3)) +
+  g <- ggplot(tidycars, aes(x = key, y = fct_rev(id1), fill = miss3)) +
       geom_tile(color = "white") +
       #scale_fill_brewer(palette = "Blues") +
       scale_fill_manual(values=c("#cacaca","#b2a0e1","darkgray")) +

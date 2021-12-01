@@ -1,1 +1,18 @@
 # Results
+```{r}
+library(dplyr)
+library(ggplot2)
+library(forcats)
+library(ggmap)
+library(tidyverse)
+```
+
+```{r}
+df <- read_csv('project_data/inconvience_reasons.csv')
+tidydf <- df %>%
+     gather(key = "opinion", value = "Counts", "Disagree", "Agree", "Neither agree nor disagree")
+ggplot(tidydf, 
+        aes(Counts, fct_reorder2(reason, opinion=="Disagree", Counts, .desc = FALSE),
+            color = opinion)) +
+     geom_point() + ggtitle("Inconvience Reasons") + ylab("") 
+```
