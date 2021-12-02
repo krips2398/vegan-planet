@@ -2,6 +2,7 @@
 <head>
   <title>Bars - problem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <h1 style="text-align: center;">Motivation behind adoption of Veganism</h1>
   <script
     type="text/javascript"
     src="https://d3js.org/d3.v3.js"
@@ -16,7 +17,7 @@
 svg {
    display: block;
    margin: 0 auto;
-   overflow:visible; /* Firefox supports overflow:visible on inline svg, Chrome does not */
+   overflow:visible; 
 }
 ul {
    margin: 0 auto;
@@ -62,7 +63,7 @@ var barWidth, year, bars, svg, scaleX, scaleY, xAxisLabelTransform;
 var opts = {
    "stroke": "none",
    "fill": "#333333",
-   "font-size": ".5em",
+   "font-size": ".7em",
    "font-weight": "bold"
 };
 // will hold the bar chart
@@ -73,15 +74,17 @@ var yAxis = d3.select("section svg").append("g").classed("yAxis",true);
 yAxis.append("text")
    .attr({
       "transform":"rotate(-90)",
-      "x": -h,
-      "y": ".6em",
+      "x": -h/2,
+      "y": "0.6em",
       "dy": "-5em",
       "text-anchor":"start",
+      "padding-bottom":"35px"
    })
    .style(opts)
-   .text("Total entries of humanitarian population by top source countries");
+   .text("Count");
 // will hold the xAxis
 var xAxis = d3.select("section svg").append("g").classed("xAxis",true);
+
 var drawBarChart = function(w,h) {
 //   d3.json("source.json", function(error, json) {
     var json = getData();
@@ -99,7 +102,7 @@ var drawBarChart = function(w,h) {
                .range([ h,0]);
             // Ordinal scale for x axis
             scaleX = d3.scale.ordinal()
-               .domain(json.Source.map(function(d) { return d; }))
+               .domain(json.index.map(function(d) { return d; }))
                .rangeRoundBands([0, w*0.95],0,0);
             bars = svg.select("g.chart").selectAll("g.bar")
                .data(json[year], function(d, i){ return [year, d, i]; });
@@ -202,7 +205,7 @@ var drawBarChart = function(w,h) {
          var drawNavigation = function () {
             var navigationYears = [];
             for(var prop in json){
-               if (prop != "Source"){
+               if (prop != "index"){
                   navigationYears.push(prop);
                }
             }
@@ -234,7 +237,7 @@ var drawBarChart = function(w,h) {
          }();
          // initially, the barchart displays 2003 data
          var init = function (){
-            drawRects(2003);
+            drawRects("Animal Protection");
             var initialYearShown = document.querySelectorAll("li");
             initialYearShown[0].classList.add("active");
          }();
@@ -254,17 +257,16 @@ var resize = function() {
 d3.select(window).on('resize', resize);
 function getData() {
     return {
-    "Source":["Hungary","China","USA","Croatia","Pakistan","India","N Korea","Nigeria","Colombia","Slovakia","Haiti","Sri Lanka","Mexico","St Vincent & Grenadines","Israel","Peru","Zimbabwe","Namibia","Guyana","Czech Rep.","Costa Rica"],
-    "2003":[60,1684,2777,14,3444,1119,0,624,1599,36,204,1189,2608,428,534,560,54,0,636,24,1836],
-    "2004":[45,1798,3069,14,758,1145,0,543,2289,17,193,1073,2820,353,417,499,90,16,290,16,694],
-    "2005":[25,1597,1484,15,608,855,0,559,843,9,353,823,3415,455,288,170,393,9,256,11,88],
-    "2006":[36,1473,1681,9,603,816,8,665,1032,0,561,828,4930,438,492,150,402,10,280,0,57],
-    "2007":[28,1319,4168,12,367,648,63,732,1812,12,2298,774,7137,407,414,147,174,13,134,102,38],
-    "2008":[297,1424,4872,14,381,677,19,749,2293,61,3254,951,9501,554,330,171,239,13,136,832,37],
-    "2009":[2494,1413,2230,54,404,517,39,761,1949,329,1212,805,7627,696,355,126,183,29,103,2083,44],
-    "2010":[2340,1516,1507,158,498,551,158,825,1093,256,1960,960,1180,726,200,91,42,310,68,42,29],
-    "2011":[4422,1796,1367,443,877,708,362,665,717,315,515,581,668,708,199,86,38,851,56,29,21],
-    "2012":[1842,1665,860,855,816,708,705,662,609,434,395,383,377,351,187,91,44,42,35,33,7]
+        'index': ['Not at all', 'Very little', 'little', 'high', 'Very High'],
+        'Animal Protection': [537, 187, 194, 179, 283],
+        'Environment': [536, 209, 245, 220, 170],
+        'Cost': [643, 239, 265, 151, 82],
+        'Health': [153, 120, 286, 397, 424],
+        'Religious and Spiritual': [973, 121, 124, 77, 85],
+        'Social Influence': [784, 202, 192, 122, 80],
+        'Social Justice World Hunger': [754, 233, 195, 124, 74],
+        'Food Trends': [978, 166, 132, 64, 40],
+        'Disgust': [592, 157, 186, 211, 234]
    // d3.csv("https://github.com/krips2398/vegan-planet/blob/main/project_data/interactive_data.csv")
 };
 };
