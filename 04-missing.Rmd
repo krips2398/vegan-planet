@@ -22,9 +22,9 @@ vis_miss(dat, sort_miss = TRUE, warn_large_data = FALSE) +
   labs(title = "") +
   xlab("")
 ```
-*Observations:*
+Observations:
 
-** 38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.
+- 38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.
 ```{r}
 colSums(is.na(dat)) %>% sort(decreasing = TRUE)
 ```
@@ -34,9 +34,9 @@ x <- missing_data.frame(dat)
 image(x = x)
 #summary(x@patterns)
 ```
-*Observations:*
+Observations:
 
-** All of the missing observations observed are from 12 main variables as presented from the map above. 
+- All of the missing observations observed are from 12 main variables as presented from the map above. 
 
 ```{r}
 #summary(x@patterns)
@@ -74,11 +74,11 @@ ggplot(data=missing_counts, aes(x=fct_reorder(city,-sumNA), y=sumNA)) +
   ylab("Missing count") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 25), axis.title.y =element_text(size = 25), axis.title.x =      element_text(size = 25))
 ```
-*Observations:*
+Observations:
 
-** We examined missing data by city, and interestingly enough, the majority of the missing data counts are those from New York City. 
+- We examined missing data by city, and interestingly enough, the majority of the missing data counts are those from New York City. 
 
-**Observations from Brooklyn have the second highest number of missing data. 
+- Observations from Brooklyn have the second highest number of missing data. 
 
 #### Function for examining missing data 
 
@@ -236,16 +236,16 @@ data.missing(df, percent = FALSE)
 data.missing(df, percent = TRUE)
 
 ```
-*Observations:*
+Observations:
 
-** Based on the resulting maps of missing data, we can note there may be a possibility of there being correlations between the first 9 variables listed on the map, as these variables all seem to have missing data within the same rows. 
+- Based on the resulting maps of missing data, we can note there may be a possibility of there being correlations between the first 9 variables listed on the map, as these variables all seem to have missing data within the same rows. 
 
-** 100% of the data within these rows also appear to be missing.
+- 100% of the data within these rows also appear to be missing.
 
-** The first missing data pattern displayed on the map accounts for just over 60% of the rows in the data
+- The first missing data pattern displayed on the map accounts for just over 60% of the rows in the data
 
-** The second missing data pattern displayed on the map accounts for just over 35% of the rows of the data
+- The second missing data pattern displayed on the map accounts for just over 35% of the rows of the data
 
-** There are no complete cases of no missing data within this dataset.
+- There are no complete cases of no missing data within this dataset.
 
 
