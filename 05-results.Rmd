@@ -5,6 +5,8 @@ library(ggplot2)
 library(forcats)
 library(ggmap)
 library(tidyverse)
+library(choroplethr)
+library(vcd)
 ```
 
 ```{r fig.height=10, fig.width=10}
@@ -21,4 +23,34 @@ ggplot(
       ylab("") 
 ```
 
+Number of restuarants in each region
+```{r}
+df_state <- read.csv("project_data/states_grouped.csv")
+state_choropleth(df_state)
+```
 
+
+How many vegetarian restuarants are opened from 2014-2018
+
+```{r}
+df <- read_csv('project_data/timeseries_opening_of_restuarants.csv')
+df <- df[order(df$date),]
+df$tmp <- "-01"
+df$date <- paste0(df$date,df$tmp)
+df$date <- as.Date(df$date, format="%Y-%m-%d")
+df = df[-1,]
+plot5 <- ggplot(df, aes(date, counts, group = 1)) +
+         geom_point() + 
+         geom_line() +
+         geom_smooth(method ="loess",span = .3,se=FALSE) +
+         scale_x_date(date_breaks = "3 month", date_labels = "%b %y") +
+         labs(x = "Date", y = "Number of Vegetarain restaurants", title = "Number of Vegetarian restaurants opened over time")
+plot5
+```
+
+```{r fig.height=5,fig.width=10}
+df <- read_csv("project_data/age_transition_legth.csv")
+df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
+df$ALLLENGTH <- as.integer(df$ALLLENGTH)
+mosaic(ALLTRANSITION ~ ALLLENGTH, df, direction=c("v","h"),main='Mosaic plot for Length and Transition')
+```
