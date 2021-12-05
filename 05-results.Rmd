@@ -48,7 +48,7 @@ plot5 <- ggplot(df, aes(date, counts, group = 1)) +
 plot5
 ```
 
-```{r fig.height=5,fig.width=10}
+```{r fig.height=10, fig.width=10}
 df <- read_csv("project_data/age_transition_legth.csv")
 df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
 df$ALLLENGTH <- as.integer(df$ALLLENGTH)
