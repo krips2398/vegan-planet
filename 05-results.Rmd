@@ -54,3 +54,18 @@ df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
 df$ALLLENGTH <- as.integer(df$ALLLENGTH)
 mosaic(ALLTRANSITION ~ ALLLENGTH, df, direction=c("v","h"),main='Mosaic plot for Length and Transition')
 ```
+
+
+```{r}
+df <- read_csv("project_data/age_difficulty_during_transition.csv")
+df <- df[c("Age","difficulty_during_transition")]
+df$difficulty_during_transition <- as.factor(df$difficulty_during_transition)
+ggplot(df, aes(fct_infreq(difficulty_during_transition))) +
+  geom_bar(color="blue",fill = "lightblue") + 
+  ggtitle("What age group is facing a lot of difficulty during transition") +
+  xlab("Opinion")+
+  ylab("Count")+
+  facet_wrap('Age') +
+  theme_grey(14) + 
+  theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5))
+```
