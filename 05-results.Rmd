@@ -18,7 +18,7 @@ ggplot(
       aes(Counts, 
           fct_reorder2(reason, opinion=="Disagree", Counts, .desc = FALSE),
           color = opinion)) +
-      geom_point() + 
+      geom_point(aes(size=1)) + 
       ggtitle("Inconvience Reasons") + 
       ylab("") 
 ```
@@ -40,9 +40,9 @@ df$date <- paste0(df$date,df$tmp)
 df$date <- as.Date(df$date, format="%Y-%m-%d")
 df = df[-1,]
 plot5 <- ggplot(df, aes(date, counts, group = 1)) +
-         geom_point() + 
-         geom_line() +
-         geom_smooth(method ="loess",span = .3,se=FALSE) +
+         geom_point(color="black") + 
+         geom_line(colour="black") +
+         geom_smooth(method ="loess",span = .3,se=FALSE, color="darkgreen") +
          scale_x_date(date_breaks = "3 month", date_labels = "%b %y") +
          labs(x = "Date", y = "Number of Vegetarain restaurants", title = "Number of Vegetarian restaurants opened over time")
 plot5
@@ -61,7 +61,7 @@ df <- read_csv("project_data/age_difficulty_during_transition.csv")
 df <- df[c("Age","difficulty_during_transition")]
 df$difficulty_during_transition <- as.factor(df$difficulty_during_transition)
 ggplot(df, aes(fct_infreq(difficulty_during_transition))) +
-  geom_bar(color="blue",fill = "lightblue") + 
+  geom_bar(color="darkgreen",fill = "palegreen3") + 
   ggtitle("What age group is facing a lot of difficulty during transition") +
   xlab("Opinion")+
   ylab("Count")+
