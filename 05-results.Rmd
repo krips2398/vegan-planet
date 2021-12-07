@@ -24,9 +24,9 @@ ggplot(
 ```
 
 Number of restuarants in each region
-```{r}
-df_state <- read.csv("project_data/states_grouped.csv")
-state_choropleth(df_state)
+```{r fig.height=10, fig.width=10}
+df_state <- read.csv("project_data/states_grouped_1.csv")
+state_choropleth(df_state, title = "Number of Vegetarian restaurants in every state", legend="Counts") + scale_fill_brewer(palette=2)
 ```
 
 

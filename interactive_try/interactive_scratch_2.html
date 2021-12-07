@@ -85,9 +85,10 @@ yAxis.append("text")
 // will hold the xAxis
 var xAxis = d3.select("section svg").append("g").classed("xAxis",true);
 
-var drawBarChart = function(w,h) {
+d3.json("https://raw.githubusercontent.com/krips2398/vegan-planet/main/project_data/interactive_plots.json", function(data){
+    var drawBarChart = function(w,h) {
 //   d3.json("source.json", function(error, json) {
-    var json = getData();
+    var json = d3.entries(data);
       if(json){
          var drawRects = function(year){
             barWidth = (w/json[year].length -1)*0.95;
@@ -255,23 +256,28 @@ var resize = function() {
    d3.select("yAxis").remove();
 };
 d3.select(window).on('resize', resize);
+}
+).catch(function(error){
+    svg.select("text#nm").text("Error loading data");
+});
+
 // var d = d3.json("https://raw.githubusercontent.com/krips2398/vegan-planet/main/project_data/interactive_plots.json").catch()
-function getData() {
-   // return d;
-    return {
-        'index': ['Not at all', 'Very little', 'little', 'high', 'Very High'],
-        'Animal Protection': [537, 187, 194, 179, 283],
-        'Environment': [536, 209, 245, 220, 170],
-        'Cost': [643, 239, 265, 151, 82],
-        'Health': [153, 120, 286, 397, 424],
-        'Religious and Spiritual': [973, 121, 124, 77, 85],
-        'Social Influence': [784, 202, 192, 122, 80],
-        'Social Justice World Hunger': [754, 233, 195, 124, 74],
-        'Food Trends': [978, 166, 132, 64, 40],
-        'Disgust': [592, 157, 186, 211, 234]
-   // d3.csv("https://github.com/krips2398/vegan-planet/blob/main/project_data/interactive_data.csv")
-};
-};
+// function getData() {
+//    // return d;
+//     return {
+//         'index': ['Not at all', 'Very little', 'little', 'high', 'Very High'],
+//         'Animal Protection': [537, 187, 194, 179, 283],
+//         'Environment': [536, 209, 245, 220, 170],
+//         'Cost': [643, 239, 265, 151, 82],
+//         'Health': [153, 120, 286, 397, 424],
+//         'Religious and Spiritual': [973, 121, 124, 77, 85],
+//         'Social Influence': [784, 202, 192, 122, 80],
+//         'Social Justice World Hunger': [754, 233, 195, 124, 74],
+//         'Food Trends': [978, 166, 132, 64, 40],
+//         'Disgust': [592, 157, 186, 211, 234]
+//    // d3.csv("https://github.com/krips2398/vegan-planet/blob/main/project_data/interactive_data.csv")
+// };
+// };
 </script>
 </body>
 </html>
