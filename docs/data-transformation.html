@@ -24,7 +24,7 @@
 <meta name="author" content="Sai Krupa Jangala, Kailande Cassamajor" />
 
 
-<meta name="date" content="2021-12-06" />
+<meta name="date" content="2021-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,8 +74,17 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#vegetarian-and-vegan-restaurants-data."><i class="fa fa-check"></i><b>2.1</b> Vegetarian and vegan restaurants data.</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#survey-data."><i class="fa fa-check"></i><b>2.2</b> Survey Data.</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#geospatial-data"><i class="fa fa-check"></i><b>3.1</b> Geospatial data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#interactive-component-data."><i class="fa fa-check"></i><b>3.2</b> Interactive component data.</a></li>
+<li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#cleaning-of-the-categorical-data."><i class="fa fa-check"></i><b>3.3</b> Cleaning of the categorical data.</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
@@ -101,7 +110,33 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<p>The code can be found at</p>
+<div id="geospatial-data" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Geospatial data</h2>
+<p>We would like to visualize the spread of vegetarian restaurants across different states in the United States. So we extracted the coloumns called PROVINCE. We then used US state mapper to map the state names to its abbreviations which is in the data. We created a new data frame which contains only two columns - Province and the number of restaurants in each province. The columns have been renamed to region and value to be compatible to the library that we are going to use.</p>
+</div>
+<div id="interactive-component-data." class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Interactive component data.</h2>
+<p>We have a total of 7 columns in the dataset which will say 1 if a person was motivated to adopt veganism for that particular else it would be 0. The same repeats for all other reasons. The reasons are as follows</p>
+<ul>
+<li>Animal Protection</li>
+<li>Environment</li>
+<li>Cost</li>
+<li>Health</li>
+<li>Religious and Spiritual</li>
+<li>Social Influence</li>
+<li>Social Justice and World Hunger</li>
+<li>Food Trends</li>
+<li>Feeling of Disgust</li>
+</ul>
+<p>We derieved 5 columns for each of the above reasons. Value 1 says that the user strongly disagree. 2 indicates disagree. 3 suggests neither agree nor disagree. 4 suggests that the user agree. 5 means that they strongly agree.</p>
+<p>The counts for each reason and each column is taken into consideration.</p>
+</div>
+<div id="cleaning-of-the-categorical-data." class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Cleaning of the categorical data.</h2>
+<p>All the categorical data that we have is present in the form of opinions. So, we counted the occurence of each opinion based on different categorical variables. For example, we count the number of users who agree with a particular reason that has caused inconvineince. We have been a scale of 1-5 to decide how much a person agrees and disagrees to a particular reason. But, we reduced the scale to 1-3. 1 suggest that the person disagrees to a particular reason. 3 suggests that a person agrees to a particular reason of inconvienience. 2 indicates that a person neither agrees nor disagrees to a particular reason. The counts for each inconvineince reason has been generated. Similar kind of mechanism is applied to Transition, Duration variables which represents the amount of time that one required to transition into a vegan and for how long they have been following a vegan diet.</p>
 
+</div>
 </div>
             </section>
 

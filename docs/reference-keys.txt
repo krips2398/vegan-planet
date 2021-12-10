@@ -1,6 +1,11 @@
 introduction
 data-sources
+vegetarian-and-vegan-restaurants-data.
+survey-data.
 data-transformation
+geospatial-data
+interactive-component-data.
+cleaning-of-the-categorical-data.
 missing-values
 missing-by-borough
 number-missing-by-city

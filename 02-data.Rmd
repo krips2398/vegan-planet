@@ -1,2 +1,11 @@
 # Data sources
 
+For this analysis, we worked on two major datasets. One is the vegetarian restaurant data and the other is the survey data.
+
+## Vegetarian and vegan restaurants data. 
+
+We sourced this data from the data.world website. This dataset contains of around 18000 restaurants that serve vegetarian or vegan food in the US. This dataset includes city, address, longitude and latitude positions of each restaurant, restaurant name, different vegetarian cuisines offered at each restaurant, province, menu data, phone numbers, different categories of vegetarian options provided and more. 
+
+## Survey Data.
+
+This data source was available at the faunalytics website. A survey was conducted for almost 1500 people who have transitioned or begining to transition into a vegetarian/vegan. It also contains information about the reasons behind the adoption of veganism, inconvienience that they facing while transitioning or after the transition, age of every individual in the survey, health and taste concerns, demographic information including religion, race etc.

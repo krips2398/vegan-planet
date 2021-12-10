@@ -1,5 +1,5 @@
 # Results
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(dplyr)
 library(ggplot2)
 library(forcats)
@@ -18,7 +18,7 @@ ggplot(
       aes(Counts, 
           fct_reorder2(reason, opinion=="Disagree", Counts, .desc = FALSE),
           color = opinion)) +
-      geom_point(aes(size=1)) + 
+      geom_point() + 
       ggtitle("Inconvience Reasons") + 
       ylab("") 
 ```
