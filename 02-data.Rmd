@@ -4,7 +4,40 @@ For this analysis, we worked on two major datasets. One is the vegetarian restau
 
 ## Vegetarian and vegan restaurants data. 
 
-We sourced this data from the data.world website. This dataset contains of around 18000 restaurants that serve vegetarian or vegan food in the US. This dataset includes city, address, longitude and latitude positions of each restaurant, restaurant name, different vegetarian cuisines offered at each restaurant, province, menu data, phone numbers, different categories of vegetarian options provided and more. 
+We sourced this data from the [data.world](https://data.world/) website. The dataset used for this project is available [here](https://data.world/datafiniti/vegetarian-vegan-restaurants). This dataset contains of around 18000 restaurants that serve vegetarian or vegan food in the US.
+Some of the columns used in this project are listed as follows:
+
+- id - id column represents the id of each restaurant.
+- address - address of every restaurant
+- categories - categories of food items served at each restaurant for example : Seafood, Fish & Seafood Retail
+- city - e.g., San Diego - city where the restaurant is located.
+- claimed - the websites from which you can order the food.
+- country - US for all the restaurants.
+- dateAdded - date when the restaurant was opened.
+- descriptions - a short description about reviews.
+- latitude - latitude of the restaurant.
+- longitude - longitude of the restaurant.
+- name - name of the restaurant.
+- province - abbreviated forms of the states in the United States. For example: California is represented as **CA**.
+
+There are other columns as well but we will be using the columns described above extensively throughout our analysis. The detailed list and description of all the columns in the dataset can be found [here](https://developer.datafiniti.co/docs/business-data-schema).
+
+
+A sample of the raw data is attached below:
+```{r}
+library(tidyverse)
+library(kableExtra)
+df <- read_csv('project_data/vegetarian_restaurants_US_datafiniti.csv')
+head(df,10) %>% kable(escape = F) %>%
+  kable_styling("striped", font_size = 9, full_width = F) %>%
+  scroll_box(width = "800px", height ="400px")
+```
+
+The number of unique values in each column of the data are listed as follows:
+```{r, message=FALSE,warning=FALSE}
+library(collapse)
+fNdistinct(df)
+```
 
 ## Survey Data.
 
