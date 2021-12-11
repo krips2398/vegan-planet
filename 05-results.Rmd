@@ -56,9 +56,10 @@ ggplot(df, aes(date, counts, group = 1)) +
 ## Length vs. Transition
 ```{r fig.height=10, fig.width=10}
 df <- read_csv("project_data/age_transition_legth.csv")
-df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
-df$ALLLENGTH <- as.integer(df$ALLLENGTH)
-mosaic(ALLTRANSITION ~ ALLLENGTH, df, direction=c("v","h"),main='Mosaic plot for Length and Transition')
+#df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
+#df$ALLLENGTH <- as.integer(df$ALLLENGTH)
+
+mosaic(Time_for_transition ~ Length_of_veganism, labeling = vcd::labeling_border(rot_labels = c(0, 0)), df, direction=c("v","h"),main='Mosaic plot for Length and Transition to veganism')
 ```
 
 ## Bar plot

@@ -2,7 +2,7 @@
 
 For this analysis, we worked on two major datasets. One is the vegetarian restaurant data and the other is the survey data.
 
-## Vegetarian and vegan restaurants data. 
+## Vegetarian and vegan restaurants data
 
 We sourced this data from the [data.world](https://data.world/) website. The dataset used for this project is available [here](https://data.world/datafiniti/vegetarian-vegan-restaurants). This dataset contains of around 18000 restaurants that serve vegetarian or vegan food in the US.
 Some of the columns used in this project are listed as follows:
@@ -28,17 +28,68 @@ A sample of the raw data is attached below:
 library(tidyverse)
 library(kableExtra)
 df <- read_csv('project_data/vegetarian_restaurants_US_datafiniti.csv')
-head(df,10) %>% kable(escape = F) %>%
-  kable_styling("striped", font_size = 9, full_width = F) %>%
+df <- subset(df, select = -c(menus))
+head(df,10) %>% kable(escape = FALSE) %>%
+  kable_styling("striped", font_size = 9, full_width = FALSE) %>%
   scroll_box(width = "800px", height ="400px")
 ```
 
 The number of unique values in each column of the data are listed as follows:
 ```{r, message=FALSE,warning=FALSE}
 library(collapse)
+df <- read_csv("data/vegetarian_restaurants_US_datafiniti.csv")
 fNdistinct(df)
 ```
 
-## Survey Data.
+## Survey Data
 
-This data source was available at the faunalytics website. A survey was conducted for almost 1500 people who have transitioned or begining to transition into a vegetarian/vegan. It also contains information about the reasons behind the adoption of veganism, inconvienience that they facing while transitioning or after the transition, age of every individual in the survey, health and taste concerns, demographic information including religion, race etc.
+This data source was available at the [faunalytics](https://faunalytics.org/) website. A survey was conducted for almost 1500 people who have transitioned or begining to transition into a vegetarian/vegan. The dataset can be found [here](https://faunalytics.org/wp-content/uploads/2017/04/Faunalytics-Current-Former-Veg-Study-Dataset-4-Groups.sav) There a total of 1023 columns in this dataset. The survey was conducted for almost 1387 participants. People from different age groups were invited to take the survey. This survey also contains respondents from different states and cities in the United States. A survey instrument has also been provided to understand the questions in the survey and the respondents answers. The survey instrument can be found [here](https://faunalytics.org/wp-content/uploads/2016/01/Faunalytics-Current-Former-Veg-Study-Survey-Instrument.pdf). The data was made available in the .sav format. We have used the pyreadstat module in python to read the data.
+It also contains information about the following: 
+
+- reasons behind the adoption of veganism 
+- inconvienience that people are facing while transitioning or after the transition 
+- age of every individual in the survey 
+- health and taste concerns .
+- demographic information including religion, race etc
+
+The data was stored in such a way that each idea was split into 5 different columns. For example, if one has to analyse the reasons behind the motivation of veganisim, we will be having 7 different columns for the same. For example, ANIMALPROTECTION, HEALTH, COST etc. Each column will tell us how much people agree or disagree to a particular reason. Based on the user's opinions, the responses where categorized as follows:
+
+- 1 - Strongly disagree
+- 2 - Disagree
+- 3 - Neither Agree nor Disagree
+- 4 - Agree
+- 5 - Strongly Agree
+
+Here is a snapshot of the columns that contain opinion data.
+
+```{r}
+df <- read_csv("project_data/Data_sources.csv")
+df %>% kable(escape = FALSE) %>%
+  kable_styling("striped", font_size = 9, full_width = FALSE) %>%
+  scroll_box(width = "800px", height ="400px")
+```
+
+The same pattern was used to capture Concerns, Reasons behind the motivation, Inconvienience reasons etc.
+The length and transitions variables are recorded as follows:
+
+- 1 - "Up to 3 months"
+- 2 - "4–11 months"
+- 3 - "1–2 years"
+- 4 - "3–5 years" 
+- 5 - "6–10 years"
+- 6 - "More than 10 years"
+- 7 - "Don’t know"
+
+Here is a snapshot of some categorical columns present in the data:
+
+```{r}
+df <- read_csv("project_data/Data_source_2.csv")
+df %>% kable(escape = FALSE) %>%
+  kable_styling("striped", font_size = 9, full_width = FALSE) %>%
+  scroll_box(width = "400px", height ="400px")
+```
+
+
+The [SPSS syntax file](https://faunalytics.org/wp-content/uploads/2016/01/Faunalytics-Current-Former-Veg-Study-Syntax-4-Groups.sps) provides a detailed list of all the columns and a short description about each column. This file was used to understand each column in the dataframe.
+
+

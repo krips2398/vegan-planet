@@ -1,7 +1,7 @@
 introduction
 data-sources
-vegetarian-and-vegan-restaurants-data.
-survey-data.
+vegetarian-and-vegan-restaurants-data
+survey-data
 data-transformation
 geospatial-data
 interactive-component-data.
