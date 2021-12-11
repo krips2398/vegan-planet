@@ -84,7 +84,7 @@ df_inc_1 <- read_csv('project_data/inconvience_reasons.csv')
 ```
 
 ```{r}
-df_trans <- read_csv("project_data/age_transition_legth.csv")
+df_trans <- read_csv("project_data/age_transition_variables_not_modified.csv")
 df_trans
 ```
 
