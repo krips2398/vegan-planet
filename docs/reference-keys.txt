@@ -12,5 +12,10 @@ number-missing-by-city
 function-for-examining-missing-data
 applying-data.missing-function-to-data
 results
+inconvience-because-of-veganism
+number-of-restuarants-in-each-region
+how-many-vegetarian-restuarants-are-opened-from-2014-2018
+length-vs.-transition
+bar-plot
 interactive-component
 conclusion
