@@ -26,6 +26,99 @@ knitr::opts_chunk$set(
 ```
 # Data sources
 
+For this analysis, we worked on two major datasets. One is the vegetarian restaurant data and the other is the survey data.
+
+## Vegetarian and vegan restaurants data
+
+We sourced this data from the [data.world](https://data.world/) website. The dataset used for this project is available [here](https://data.world/datafiniti/vegetarian-vegan-restaurants). This dataset contains of around 18000 restaurants that serve vegetarian or vegan food in the US.
+Some of the columns used in this project are listed as follows:
+
+- id - id column represents the id of each restaurant.
+- address - address of every restaurant
+- categories - categories of food items served at each restaurant for example : Seafood, Fish & Seafood Retail
+- city - e.g., San Diego - city where the restaurant is located.
+- claimed - the websites from which you can order the food.
+- country - US for all the restaurants.
+- dateAdded - date when the restaurant was opened.
+- descriptions - a short description about reviews.
+- latitude - latitude of the restaurant.
+- longitude - longitude of the restaurant.
+- name - name of the restaurant.
+- province - abbreviated forms of the states in the United States. For example: California is represented as **CA**.
+
+There are other columns as well but we will be using the columns described above extensively throughout our analysis. The detailed list and description of all the columns in the dataset can be found [here](https://developer.datafiniti.co/docs/business-data-schema).
+
+
+A sample of the raw data is attached below:
+```{r}
+library(tidyverse)
+library(kableExtra)
+df <- read_csv('project_data/vegetarian_restaurants_US_datafiniti.csv')
+df <- subset(df, select = -c(menus))
+head(df,10) %>% kable(escape = FALSE) %>%
+  kable_styling("striped", font_size = 9, full_width = FALSE) %>%
+  scroll_box(width = "800px", height ="400px")
+```
+
+The number of unique values in each column of the data are listed as follows:
+```{r, message=FALSE,warning=FALSE}
+library(collapse)
+df <- read_csv("data/vegetarian_restaurants_US_datafiniti.csv")
+fNdistinct(df)
+```
+
+## Survey Data
+
+This data source was available at the [faunalytics](https://faunalytics.org/) website. A survey was conducted for almost 1500 people who have transitioned or begining to transition into a vegetarian/vegan. The dataset can be found [here](https://faunalytics.org/wp-content/uploads/2017/04/Faunalytics-Current-Former-Veg-Study-Dataset-4-Groups.sav) There a total of 1023 columns in this dataset. The survey was conducted for almost 1387 participants. People from different age groups were invited to take the survey. This survey also contains respondents from different states and cities in the United States. A survey instrument has also been provided to understand the questions in the survey and the respondents answers. The survey instrument can be found [here](https://faunalytics.org/wp-content/uploads/2016/01/Faunalytics-Current-Former-Veg-Study-Survey-Instrument.pdf). The data was made available in the .sav format. We have used the pyreadstat module in python to read the data.
+It also contains information about the following: 
+
+- reasons behind the adoption of veganism 
+- inconvienience that people are facing while transitioning or after the transition 
+- age of every individual in the survey 
+- health and taste concerns .
+- demographic information including religion, race etc
+
+The data was stored in such a way that each idea was split into 5 different columns. For example, if one has to analyse the reasons behind the motivation of veganisim, we will be having 7 different columns for the same. For example, ANIMALPROTECTION, HEALTH, COST etc. Each column will tell us how much people agree or disagree to a particular reason. Based on the user's opinions, the responses where categorized as follows:
+
+- 1 - Strongly disagree
+- 2 - Disagree
+- 3 - Neither Agree nor Disagree
+- 4 - Agree
+- 5 - Strongly Agree
+
+Here is a snapshot of the columns that contain opinion data.
+
+```{r}
+df <- read_csv("project_data/Data_sources.csv")
+df %>% kable(escape = FALSE) %>%
+  kable_styling("striped", font_size = 9, full_width = FALSE) %>%
+  scroll_box(width = "800px", height ="400px")
+```
+
+The same pattern was used to capture Concerns, Reasons behind the motivation, Inconvienience reasons etc.
+The length and transitions variables are recorded as follows:
+
+- 1 - "Up to 3 months"
+- 2 - "4–11 months"
+- 3 - "1–2 years"
+- 4 - "3–5 years" 
+- 5 - "6–10 years"
+- 6 - "More than 10 years"
+- 7 - "Don’t know"
+
+Here is a snapshot of some categorical columns present in the data:
+
+```{r}
+df <- read_csv("project_data/Data_source_2.csv")
+df %>% kable(escape = FALSE) %>%
+  kable_styling("striped", font_size = 9, full_width = FALSE) %>%
+  scroll_box(width = "400px", height ="400px")
+```
+
+
+The [SPSS syntax file](https://faunalytics.org/wp-content/uploads/2016/01/Faunalytics-Current-Former-Veg-Study-Syntax-4-Groups.sps) provides a detailed list of all the columns and a short description about each column. This file was used to understand each column in the dataframe.
+
+
 
 <!--chapter:end:02-data.Rmd-->
 
@@ -37,6 +130,40 @@ knitr::opts_chunk$set(
 )
 ```
 # Data transformation
+
+
+The code can be found at 
+
+## Geospatial data
+
+We would like to visualize the spread of vegetarian restaurants across different states in the United States. So we extracted the coloumns called PROVINCE. We then used US state mapper to map the state names to its abbreviations which is in the data. We created a new data frame which contains only two columns - Province and the number of restaurants in each province. The columns have been renamed to region and value to be compatible to the library that we are going to use. 
+
+## Interactive component data.
+We have a total of 7 columns in the dataset which will say 1 if a person was motivated to adopt veganism for that particular else it would be 0. The same repeats for all other reasons. The reasons are as follows
+
+- Animal Protection
+- Environment
+- Cost
+- Health
+- Religious and Spiritual
+- Social Influence
+- Social Justice and World Hunger
+- Food Trends
+- Feeling of Disgust
+
+We derieved 5 columns for each of the above reasons. Value 1 says that the user strongly disagree. 2 indicates disagree. 3 suggests neither agree nor disagree. 4 suggests that the user agree. 5 means that they strongly agree.
+
+The counts for each reason and each column is taken into consideration.
+
+## Cleaning of the categorical data.
+
+All the categorical data that we have is present in the form of opinions. So, we counted the occurence of each opinion based on different categorical variables. For example,  we count the number of users who agree with a particular reason that has caused inconvineince. We have been a scale of 1-5 to decide how much a person agrees and disagrees to a particular reason. But, we reduced the scale to 1-3. 1 suggest that the person disagrees to a particular reason. 3 suggests that a person agrees to a particular reason of inconvienience. 2 indicates that a person neither agrees nor disagrees to a particular reason. The counts for each inconvineince reason has been generated. Similar kind of mechanism is applied to Transition, Duration variables which represents the amount of time that one required to transition into a vegan and for how long they have been following a vegan diet.  
+
+
+
+
+
+
 
 <!--chapter:end:03-cleaning.Rmd-->
 
@@ -319,7 +446,8 @@ library(choroplethr)
 library(vcd)
 ```
 
-```{r fig.height=10, fig.width=10}
+## Inconvience because of veganism
+```{r fig.height=10,fig.width=15}
 df <- read_csv('project_data/inconvience_reasons.csv')
 tidydf <- df %>%
      gather(key = "opinion", value = "Counts", "Disagree", "Agree", "Neither agree nor disagree")
@@ -329,18 +457,23 @@ ggplot(
           fct_reorder2(reason, opinion=="Disagree", Counts, .desc = FALSE),
           color = opinion)) +
       geom_point(aes(size=1)) + 
-      ggtitle("Inconvience Reasons") + 
-      ylab("") 
+      ggtitle("Inconvience because of veganism") +
+      ylab("") +
+      theme_grey(16) +
+      theme(plot.title = element_text(hjust = 0.5)) +
+      guides(size=FALSE) 
+
+options(repr.P.width=4,repr.P.height=10)
 ```
 
-Number of restuarants in each region
+## Number of restuarants in each region
 ```{r fig.height=10, fig.width=10}
 df_state <- read.csv("project_data/states_grouped_1.csv")
 state_choropleth(df_state, title = "Number of Vegetarian restaurants in every state", legend="Counts") + scale_fill_brewer(palette=2)
 ```
 
 
-How many vegetarian restuarants are opened from 2014-2018
+## How many vegetarian restuarants are opened from 2014-2018
 
 ```{r}
 df <- read_csv('project_data/timeseries_opening_of_restuarants.csv')
@@ -349,23 +482,24 @@ df$tmp <- "-01"
 df$date <- paste0(df$date,df$tmp)
 df$date <- as.Date(df$date, format="%Y-%m-%d")
 df = df[-1,]
-plot5 <- ggplot(df, aes(date, counts, group = 1)) +
+ggplot(df, aes(date, counts, group = 1)) +
          geom_point(color="black") + 
          geom_line(colour="black") +
          geom_smooth(method ="loess",span = .3,se=FALSE, color="darkgreen") +
          scale_x_date(date_breaks = "3 month", date_labels = "%b %y") +
          labs(x = "Date", y = "Number of Vegetarain restaurants", title = "Number of Vegetarian restaurants opened over time")
-plot5
 ```
 
+## Length vs. Transition
 ```{r fig.height=10, fig.width=10}
 df <- read_csv("project_data/age_transition_legth.csv")
-df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
-df$ALLLENGTH <- as.integer(df$ALLLENGTH)
-mosaic(ALLTRANSITION ~ ALLLENGTH, df, direction=c("v","h"),main='Mosaic plot for Length and Transition')
+#df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
+#df$ALLLENGTH <- as.integer(df$ALLLENGTH)
+
+mosaic(Time_for_transition ~ Length_of_veganism, labeling = vcd::labeling_border(rot_labels = c(0, 0)), df, direction=c("v","h"),main='Mosaic plot for Length and Transition to veganism')
 ```
 
-
+## Bar plot
 ```{r}
 df <- read_csv("project_data/age_difficulty_during_transition.csv")
 df <- df[c("Age","difficulty_during_transition")]

@@ -1,1 +1,35 @@
 # Data transformation
+
+
+The code can be found at 
+
+## Geospatial data
+
+We would like to visualize the spread of vegetarian restaurants across different states in the United States. So we extracted the coloumns called PROVINCE. We then used US state mapper to map the state names to its abbreviations which is in the data. We created a new data frame which contains only two columns - Province and the number of restaurants in each province. The columns have been renamed to region and value to be compatible to the library that we are going to use. 
+
+## Interactive component data.
+We have a total of 7 columns in the dataset which will say 1 if a person was motivated to adopt veganism for that particular else it would be 0. The same repeats for all other reasons. The reasons are as follows
+
+- Animal Protection
+- Environment
+- Cost
+- Health
+- Religious and Spiritual
+- Social Influence
+- Social Justice and World Hunger
+- Food Trends
+- Feeling of Disgust
+
+We derieved 5 columns for each of the above reasons. Value 1 says that the user strongly disagree. 2 indicates disagree. 3 suggests neither agree nor disagree. 4 suggests that the user agree. 5 means that they strongly agree.
+
+The counts for each reason and each column is taken into consideration.
+
+## Cleaning of the categorical data.
+
+All the categorical data that we have is present in the form of opinions. So, we counted the occurence of each opinion based on different categorical variables. For example,  we count the number of users who agree with a particular reason that has caused inconvineince. We have been a scale of 1-5 to decide how much a person agrees and disagrees to a particular reason. But, we reduced the scale to 1-3. 1 suggest that the person disagrees to a particular reason. 3 suggests that a person agrees to a particular reason of inconvienience. 2 indicates that a person neither agrees nor disagrees to a particular reason. The counts for each inconvineince reason has been generated. Similar kind of mechanism is applied to Transition, Duration variables which represents the amount of time that one required to transition into a vegan and for how long they have been following a vegan diet.  
+
+
+
+
+
+
