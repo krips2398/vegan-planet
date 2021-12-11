@@ -69,3 +69,78 @@ ggplot(df, aes(fct_infreq(difficulty_during_transition))) +
   theme_grey(14) + 
   theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5))
 ```
+
+```{r}
+df_inc <- read_csv("project_data/age_difficulty_during_transition.csv")
+df_inc
+df_inc_1 <- read_csv('project_data/inconvience_reasons.csv')
+```
+
+```{r}
+df_trans <- read_csv("project_data/age_transition_legth.csv")
+df_trans
+```
+
+```{r}
+sapply(df_trans, class)
+```
+
+
+```{r}
+df_trans$ALLTRANSITION <- as.factor(df_trans$ALLTRANSITION)
+```
+```{r}
+df_trans$ALLTRANSITION <- as.factor(df_trans$ALLTRANSITION)
+ggplot(df_trans, aes(x=ALLAGEADOPTION, y=ALLTRANSITION)) + geom_boxplot() + theme_grey(16) + ggtitle(" Summary of loan amounts for each level of loan purpose") + xlab("Age")  + ylab("How Long before Fully Transitioned After Deciding") + theme(text = element_text(size=9), legend.position = "none")
+```
+
+```{r}
+df_trans$ALLLENGTH <- as.factor(df_trans$ALLLENGTH)
+ggplot(df_trans, aes(x=ALLAGEADOPTION, y=ALLLENGTH)) + geom_boxplot() + theme_grey(16) + ggtitle(" Summary of loan amounts for each level of loan purpose") + xlab("Age")  + ylab("Length of Diet") + theme(text = element_text(size=9), legend.position = "none")
+```
+
+```{r}
+df_veg_reasons <- read_csv("project_data/reasons_for_veganism.csv")
+df_veg_reasons
+```
+
+```{r}
+df_veg_merged <- merge(df_trans, df_veg_reasons, by = "id")
+df_veg_merged
+```
+
+```{r}
+chosen_cols <- c("ALLTRANSITION","ALLLENGTH", "ALLANIMALPROTECTION",
+                 "ALLENVIRONMENT", "ALLCOST","ALLHEALTH",
+                 "ALLRELIGIOUSSPIRITUAL", "ALLSOCIALINFLUENCE",
+                 "ALLSOCIALJUSTICEWORLDHUNGER", "ALLFOODTREND",
+                 "ALLDISGUST")
+df_veg_merged[chosen_cols] <- lapply(df_veg_merged[chosen_cols], factor)
+                 
+#df_pivoted <- df_veg_merged %>%
+  #pivot_longer(everything(), manes_to = "")
+ggplot(df_veg_merged, aes(x=ALLTRANSITION)) +
+  geom_bar(color="darkgreen",fill = "palegreen3") + 
+  ggtitle("Length to Transition vs. Length of Overall Diet") +
+  xlab("How Long Partitipants took to Transition")+
+  ylab("Count")+
+  facet_wrap('ALLLENGTH') +
+  theme_grey(14) + 
+  theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r}
+df_incondichot <- read_csv('project_data/inconvenience_dichot.csv')
+df_incondichot
+
+
+df_incondichot$ALLINCONVENIENCE4D <- as.factor(df_incondichot$ALLINCONVENIENCE4D)
+df_incondichot$ALLLENGTH <- as.integer(df_incondichot$ALLLENGTH)
+mosaic(ALLLENGTH~ALLINCONVENIENCE4D, df_incondichot, direction=c("v","h"),main='Length of Diet & Difficulty Accessing Health Foods')
+```
+
+```{r}
+df_incondichot$ALLINCONVENIENCE3D <- as.factor(df_incondichot$ALLINCONVENIENCE3D)
+mosaic(ALLLENGTH~ALLINCONVENIENCE3D, df_incondichot, direction=c("v","h"),main='Length of Diet & Trouble Finding Restaurants')
+```
