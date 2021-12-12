@@ -24,7 +24,7 @@
 <meta name="author" content="Sai Krupa Jangala, Kailande Cassamajor" />
 
 
-<meta name="date" content="2021-12-11" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -87,7 +87,12 @@
 <li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#interactive-component-data."><i class="fa fa-check"></i><b>3.2</b> Interactive component data.</a></li>
 <li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#cleaning-of-the-categorical-data."><i class="fa fa-check"></i><b>3.3</b> Cleaning of the categorical data.</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#visual-representation-of-missing-values-in-dataset"><i class="fa fa-check"></i><b>4.1</b> Visual representation of missing values in dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#missing-by-borough"><i class="fa fa-check"></i><b>4.2</b> Missing by borough</a></li>
+<li class="chapter" data-level="4.3" data-path="missing-values.html"><a href="missing-values.html#number-missing-by-city"><i class="fa fa-check"></i><b>4.3</b> Number missing by city</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#inconvience-because-of-veganism"><i class="fa fa-check"></i><b>5.1</b> Inconvience because of veganism</a></li>
@@ -96,8 +101,9 @@
 <li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#length-vs.-transition"><i class="fa fa-check"></i><b>5.4</b> Length vs. Transition</a></li>
 <li class="chapter" data-level="5.5" data-path="results.html"><a href="results.html#bar-plot"><i class="fa fa-check"></i><b>5.5</b> Bar plot</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="number-of-restaurants-in-each-meteropolitian-city.html"><a href="number-of-restaurants-in-each-meteropolitian-city.html"><i class="fa fa-check"></i><b>6</b> Number of restaurants in each meteropolitian city</a></li>
+<li class="chapter" data-level="7" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>7</b> Interactive component</a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -119,7 +125,6 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
-<p>The code can be found at</p>
 <div id="geospatial-data" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Geospatial data</h2>
 <p>We would like to visualize the spread of vegetarian restaurants across different states in the United States. So we extracted the coloumns called PROVINCE. We then used US state mapper to map the state names to its abbreviations which is in the data. We created a new data frame which contains only two columns - Province and the number of restaurants in each province. The columns have been renamed to region and value to be compatible to the library that we are going to use.</p>
@@ -138,12 +143,110 @@
 <li>Food Trends</li>
 <li>Feeling of Disgust</li>
 </ul>
-<p>We derieved 5 columns for each of the above reasons. Value 1 says that the user strongly disagree. 2 indicates disagree. 3 suggests neither agree nor disagree. 4 suggests that the user agree. 5 means that they strongly agree.</p>
-<p>The counts for each reason and each column is taken into consideration.</p>
+<p>We derieved 5 columns for each of the above reasons. Value 1 says that the user strongly disagree. 2 indicates disagree. 3 suggests neither agree nor disagree. 4 suggests that the user agree. 5 means that they strongly agree.
+The counts for each reason and each column is taken into consideration.</p>
 </div>
 <div id="cleaning-of-the-categorical-data." class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Cleaning of the categorical data.</h2>
-<p>All the categorical data that we have is present in the form of opinions. So, we counted the occurence of each opinion based on different categorical variables. For example, we count the number of users who agree with a particular reason that has caused inconvineince. We have been a scale of 1-5 to decide how much a person agrees and disagrees to a particular reason. But, we reduced the scale to 1-3. 1 suggest that the person disagrees to a particular reason. 3 suggests that a person agrees to a particular reason of inconvienience. 2 indicates that a person neither agrees nor disagrees to a particular reason. The counts for each inconvineince reason has been generated. Similar kind of mechanism is applied to Transition, Duration variables which represents the amount of time that one required to transition into a vegan and for how long they have been following a vegan diet.</p>
+<p>All the categorical data that we have is present in the form of opinions. So, we counted the occurence of each opinion based on different categorical variables. For example, we count the number of users who agree with a particular reason that has caused inconvineince. We have been a scale of 1-5 to decide how much a person agrees and disagrees to a particular reason. But, we reduced the scale to 1-3. 1 suggest that the person disagrees to a particular reason. 3 suggests that a person agrees to a particular reason of inconvienience. 2 indicates that a person neither agrees nor disagrees to a particular reason. The counts for each inconvineince reason has been generated. Similar kind of mechanism is applied to Transition, Duration variables which represents the amount of time that one required to transition into a vegan and for how long they have been following a vegan diet.<br />
+Every column required for the analysis is decoded and renamed for convienience. For example, ALLINCONVENIENCE3D represents how much people agree and disagree with a concern. We would like the length of veganism for people who expressed this concern. So we transformed the data like below.</p>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:400px; ">
+<table class="table table-striped" style="font-size: 9px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ALLLENGTH
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+ALLINCONVENIENCE3D
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+ALLINCONVENIENCE4D
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0-3 months
+</td>
+<td style="text-align:right;">
+124
+</td>
+<td style="text-align:right;">
+94
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1-2 years
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3-5 years
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4-11 months
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6-9 years
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9 or more years
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No idea
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The cleaning was done in python. The code can be found <a href="https://github.com/krips2398/vegan-planet/blob/main/data_transformation/Data%20Transformation.ipynb">here</a></p>
 
 </div>
 </div>

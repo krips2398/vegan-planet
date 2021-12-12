@@ -7,6 +7,7 @@ geospatial-data
 interactive-component-data.
 cleaning-of-the-categorical-data.
 missing-values
+visual-representation-of-missing-values-in-dataset
 missing-by-borough
 number-missing-by-city
 function-for-examining-missing-data
@@ -17,5 +18,6 @@ number-of-restuarants-in-each-region
 how-many-vegetarian-restuarants-are-opened-from-2014-2018
 length-vs.-transition
 bar-plot
+number-of-restaurants-in-each-meteropolitian-city
 interactive-component
 conclusion

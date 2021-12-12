@@ -1,6 +1,6 @@
 # Missing values
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 library(dplyr)
 library(naniar)
 library(mi)
@@ -13,6 +13,7 @@ library(janitor)
 library(tibble)
 ```
 
+## Visual representation of missing values in dataset
 ```{r fig.width=7, fig.height=5}
 #df <- read.csv("/Users/saikrupa/Desktop/projects_in_R/data/vegetarian_restaurants_US_datafiniti.csv")
 # "/Users/saikrupa/Desktop/projects_in_R/data/Datafiniti_Vegetarian_and_Vegan_Restaurants.csv"
@@ -22,27 +23,21 @@ vis_miss(dat, sort_miss = TRUE, warn_large_data = FALSE) +
   labs(title = "") +
   xlab("")
 ```
-Observations:
+38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.
 
-- 38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.
-```{r}
+```{r message=FALSE, warning=FALSE}
 colSums(is.na(dat)) %>% sort(decreasing = TRUE)
 ```
 
-```{r}
+```{r message=FALSE,warning=FALSE}
 x <- missing_data.frame(dat)
 image(x = x)
 #summary(x@patterns)
 ```
-Observations:
+All of the missing observations observed are from 12 main variables as presented from the map above. 
 
-- All of the missing observations observed are from 12 main variables as presented from the map above. 
 
-```{r}
-#summary(x@patterns)
-```
-
-#### Missing by borough
+## Missing by borough
 ```{r}
 df_b <- dat %>% 
   mutate(Borough = city)
@@ -61,7 +56,7 @@ percent_missing <- df_b %>%
   mutate(percent_na = round(num_na_menus_currency/num_restaurants, 2)) %>% arrange(-percent_na)
 ```
 
-#### Number missing by city
+## Number missing by city
 
 ```{r}
 missing_counts <- dat %>% group_by(city) %>% summarise_all(~sum(is.na(.))) %>% transmute(city, sumNA = rowSums(.[-1]))
@@ -72,7 +67,7 @@ ggplot(data=missing_counts, aes(x=fct_reorder(city,-sumNA), y=sumNA)) +
   geom_bar(stat="identity", color="blue", fill="lightblue") + 
   xlab("City") +
   ylab("Missing count") + 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 25), axis.title.y =element_text(size = 25), axis.title.x =      element_text(size = 25))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 25), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 25), axis.title.y =element_text(size = 25), axis.title.x =element_text(size = 25))
 ```
 Observations:
 

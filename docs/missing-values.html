@@ -24,7 +24,7 @@
 <meta name="author" content="Sai Krupa Jangala, Kailande Cassamajor" />
 
 
-<meta name="date" content="2021-12-11" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -87,7 +87,12 @@
 <li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#interactive-component-data."><i class="fa fa-check"></i><b>3.2</b> Interactive component data.</a></li>
 <li class="chapter" data-level="3.3" data-path="data-transformation.html"><a href="data-transformation.html#cleaning-of-the-categorical-data."><i class="fa fa-check"></i><b>3.3</b> Cleaning of the categorical data.</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#visual-representation-of-missing-values-in-dataset"><i class="fa fa-check"></i><b>4.1</b> Visual representation of missing values in dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#missing-by-borough"><i class="fa fa-check"></i><b>4.2</b> Missing by borough</a></li>
+<li class="chapter" data-level="4.3" data-path="missing-values.html"><a href="missing-values.html#number-missing-by-city"><i class="fa fa-check"></i><b>4.3</b> Number missing by city</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#inconvience-because-of-veganism"><i class="fa fa-check"></i><b>5.1</b> Inconvience because of veganism</a></li>
@@ -96,8 +101,9 @@
 <li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#length-vs.-transition"><i class="fa fa-check"></i><b>5.4</b> Length vs. Transition</a></li>
 <li class="chapter" data-level="5.5" data-path="results.html"><a href="results.html#bar-plot"><i class="fa fa-check"></i><b>5.5</b> Bar plot</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="number-of-restaurants-in-each-meteropolitian-city.html"><a href="number-of-restaurants-in-each-meteropolitian-city.html"><i class="fa fa-check"></i><b>6</b> Number of restaurants in each meteropolitian city</a></li>
+<li class="chapter" data-level="7" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>7</b> Interactive component</a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -119,11 +125,10 @@
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-Observations:</p>
-<ul>
-<li>38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.</li>
-</ul>
+<div id="visual-representation-of-missing-values-in-dataset" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Visual representation of missing values in dataset</h2>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.</p>
 <pre><code>##   descriptions.dateSeen descriptions.sourceURLs      descriptions.value 
 ##                   10000                   10000                   10000 
 ##            features.key          features.value               hours.day 
@@ -289,28 +294,25 @@ Observations:</p>
 ## [128,] &quot;languagesSpoken&quot;         &quot;yearOpened&quot;        
 ## [129,] &quot;menus.category&quot;          &quot;menus.currency&quot;    
 ## [130,] &quot;twitter&quot;                 &quot;websites&quot;</code></pre>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" />
-Observations:</p>
-<ul>
-<li>All of the missing observations observed are from 12 main variables as presented from the map above.</li>
-</ul>
-<div id="missing-by-borough" class="section level4" number="4.0.0.1">
-<h4><span class="header-section-number">4.0.0.1</span> Missing by borough</h4>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+All of the missing observations observed are from 12 main variables as presented from the map above.</p>
 </div>
-<div id="number-missing-by-city" class="section level4" number="4.0.0.2">
-<h4><span class="header-section-number">4.0.0.2</span> Number missing by city</h4>
+<div id="missing-by-borough" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Missing by borough</h2>
+</div>
+<div id="number-missing-by-city" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Number missing by city</h2>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="1440" />
 Observations:</p>
 <ul>
 <li><p>We examined missing data by city, and interestingly enough, the majority of the missing data counts are those from New York City.</p></li>
 <li><p>Observations from Brooklyn have the second highest number of missing data.</p></li>
 </ul>
+<div id="function-for-examining-missing-data" class="section level4" number="4.3.0.1">
+<h4><span class="header-section-number">4.3.0.1</span> Function for examining missing data</h4>
 </div>
-<div id="function-for-examining-missing-data" class="section level4" number="4.0.0.3">
-<h4><span class="header-section-number">4.0.0.3</span> Function for examining missing data</h4>
-</div>
-<div id="applying-data.missing-function-to-data" class="section level4" number="4.0.0.4">
-<h4><span class="header-section-number">4.0.0.4</span> Applying data.missing function to data</h4>
+<div id="applying-data.missing-function-to-data" class="section level4" number="4.3.0.2">
+<h4><span class="header-section-number">4.3.0.2</span> Applying data.missing function to data</h4>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="1920" /></p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="1920" />
 Observations:</p>
@@ -322,6 +324,7 @@ Observations:</p>
 <li><p>There are no complete cases of no missing data within this dataset.</p></li>
 </ul>
 
+</div>
 </div>
 </div>
             </section>
