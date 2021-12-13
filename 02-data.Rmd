@@ -37,7 +37,7 @@ head(df,10) %>% kable(escape = FALSE) %>%
 The number of unique values in each column of the data are listed as follows:
 ```{r, message=FALSE,warning=FALSE}
 library(collapse)
-df <- read_csv("data/vegetarian_restaurants_US_datafiniti.csv")
+df <- read_csv("project_data/vegetarian_restaurants_US_datafiniti_data.csv")
 fNdistinct(df)
 ```
 
