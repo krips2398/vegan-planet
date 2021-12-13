@@ -13,7 +13,8 @@ library(janitor)
 library(tibble)
 ```
 
-## Why do we need to analyse missing values
+## Reason(s) Behind Analysing Missing Values 
+In order to make informed decisions with the data, we had to first understand what parts of the data were missing in order to handle the data appropriately. We decided to conduct an analysis of missing data in the Datafiniti dataset to understand what variables we were able to utilize to answer our questions concerning vegan/vegetarian restaurants. It is important to understand the overall structural nature of the data to get an idea what portion and how much of the data is missing, and how much is present.
 
 
 ## Visual representation of missing values in dataset
@@ -26,30 +27,30 @@ vis_miss(dat, sort_miss = TRUE, warn_large_data = FALSE) +
   labs(title = "") +
   xlab("")
 ```
-38.3% of all observations in the data are missing while 61.7% of the observations in the data are present.
 
+For this dataset we were able to find out that 38.3% of the overall data are missing while 61.7% are present. Based on our results it appears that most of the data present have some association with location, address, region, menus, cuisines. Most of the data missing appear to be associated with the restaurant hours of operation, dress attire, and other restaurant business features.
+
+The number of missing values in every column are listed as follows:
 ```{r message=FALSE, warning=FALSE}
 colSums(is.na(dat)) %>% sort(decreasing = TRUE)
 ```
 
 
-## Missing values for every city
-
-```{r}
-missing_counts <- dat %>% group_by(city) %>% summarise_all(~sum(is.na(.))) %>% transmute(city, sumNA = rowSums(.[-1]))
-```
+## Missing data for every city
 
 ```{r fig.width=15, fig.height=20}
+missing_counts <- dat %>% group_by(city) %>% summarise_all(~sum(is.na(.))) %>% transmute(city, sumNA = rowSums(.[-1]))
 ggplot(data=missing_counts, aes(x=fct_reorder(city,-sumNA), y=sumNA)) + 
   geom_bar(stat="identity", color="blue", fill="lightblue") + 
   xlab("City") +
   ylab("Missing count") + 
   ggtitle("Missing values by city") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 25), axis.title.y =element_text(size = 14), axis.title.x =element_text(size = 25))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(vjust = 0.5, hjust=1, size = 14), axis.title.y =element_text(size = 14), axis.title.x =element_text(size = 14))
 ```
 
 We examined missing data by city, and interestingly enough, the majority of the missing data counts are those from New York City. Observations from Brooklyn have the second highest number of missing data. 
 
+## Analysis of missing data by row count and percentage
 ```{r fig.size=20}
 data.missing <- function(df, percent = 'FALSE'){
   

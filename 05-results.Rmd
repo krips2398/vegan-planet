@@ -20,7 +20,7 @@ ggplot(
           fct_reorder2(reason, opinion=="Disagree", Counts, .desc = FALSE),
           color = opinion)) +
       geom_point(aes(size=1)) + 
-      ggtitle("Inconvenience because of veganism") +
+      ggtitle("Reported Inconveniences Behind Vegan/Vegetarian Diet") +
       ylab("") +
       theme_grey(16) +
       theme(plot.title = element_text(hjust = 0.5)) +
@@ -29,18 +29,18 @@ ggplot(
 options(repr.P.width=4,repr.P.height=10)
 ```
 
-Within this dataset, we notice that there is a higher count of individuals that disagreed with the specified inconvenience reasons for a plant-based diet, except for the "no restaruarnts for grab n go". Out of all of the inconvenience reasons, "diffifult during time of transitino" and "time consuming" had the highest counts of agreement from participants of the survey, while having to prepare both vegetarian and non-vegetarian foods had the least counts of agreements amongst participants. 
+Within this dataset, we notice that there is a higher count of individuals that disagreed with the specified inconvenience reasons under a vegan/vegetarian diet, except for the “no restaurants for grab n go”. Out of all of the inconvenience reasons, “difficult during time of transition” and “time consuming” had the highest counts of agreement from participants of the survey; while having to prepare both vegetarian and non-vegetarian foods had the least counts of agreements amongst participants. 
 
-## What is Vegan/Vegetarian Restaurant Count Density Across the US?
+## Roughly How Many Vegan/Vegetarian Restaurants are there Across States?
 ```{r fig.height=10, fig.width=10}
 df_state <- read.csv("project_data/states_grouped_1.csv")
-state_choropleth(df_state, title = "Number of Vegetarian restaurants in every state", legend="Counts") + 
+state_choropleth(df_state, title = "Counts of Vegan/Vegetarian Restaurants in Each State", legend="Counts") + 
   scale_fill_brewer(palette=2)
 ```
 
-The states with the highest number of plant-based restaurants include states in the north east such as NY, PA, and MA with OH - including TX and CA in the west and FL in the South east region of the country. States with the fewest counts of plant-based restaurants include states located in teh Pacific Northwest such as ID, MT, WY, and the Dakotas. Overall, North East region of the United States has the most number of vegetarian restaurants. 
+The states with the highest number of vegan/vegetarian restaurants include states in the Northeast such as NY, PA, and MA with OH - including TX and CA in the West and FL in the Southeast region of the country. States with the fewest vegan/vegetarian restaurants include states located in the Pacific Northwest such as ID, MT, WY, and the Dakotas. Overall, the Northeast region of the United States has the most number of vegan/vegetarian restaurants. 
 
-##  How Many Vegan/Vegetarian Restaurants Opened Over Time? Are There ANy Noticeable Trends?
+##  How many Vegan/Vegetarian Restaurants Opened Over Time? Are There Any Noticeable Trends
 
 ```{r}
 df <- read_csv('project_data/timeseries_opening_of_restuarants.csv')
@@ -54,32 +54,32 @@ ggplot(df, aes(date, counts, group = 1)) +
          geom_line(colour="black") +
          geom_smooth(method ="loess",span = .3,se=FALSE, color="darkgreen") +
          scale_x_date(date_breaks = "3 month", date_labels = "%b %y") +
-         labs(x = "Month and Year", y = "Number of Vegetarain restaurants", title = "Vegetarian restaurants opened over time") +
+         labs(x = "Month and Year", y = "Number of Vegetarain restaurants", title = "Vegan/Vegetarian Restaurants Opened (2015-2018)") +
          theme(plot.title = element_text(hjust = 0.5))
 ```
 
-There are two noticeable peaks in vegetarian restaurant opening in October 2016 and in April of 2017. However, based on this dataset the largest uptick in vegetarian restaurant openings happened from April 2017 to ~ July 2017. It would be interesting to investigatge the factors taht led to this large uptick in vegetarian restaurants opening and the locations in which they occured throughout the United States. from July 2016 to ~March 2017 restaurant opening reached a low plateau.
+There are two noticeable peaks in vegan/vegetarian restaurant openings in October 2016 and in April of 2017. However, based on this dataset the largest increase in vegan/vegetarian restaurant openings happened from April 2017 to July 2017. It would be interesting to investigate the factors that led to this large uptick in vegan/vegetarian restaurant openings and the locations throughout the United States. From July 2016 to ~March 2017 restaurant openings reached their lowest with well below 250. 
 
-## Is There A Relationship Between Time to Transition to Veganism & The Length of Time Mainting the Diet?
+## Is There A Relationship Between Time to Transition to Veganism & The Length of Time Maintaining the Diet?
 ```{r fig.height=15, fig.width=15}
 df <- read_csv("project_data/age_transition_length_new.csv")
 #df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
 #df$ALLLENGTH <- as.integer(df$ALLLENGTH)
 df$Length_of_veganism <- factor(df$Length_of_veganism, levels = c("0-3 months", "4-11 months", "1-2 years", "3-5 years", "6-9 years", "9 or more years","No idea"))
 df$Time_for_transition <- factor(df$Time_for_transition, levels = c("1-6 days", "1-3 weeks", "1-6 months", "7-12 months", "more than a year", "No idea"))
-mosaic(Time_for_transition ~ Length_of_veganism, labeling = vcd::labeling_border(rot_labels = c(0, 45)), df,direction=c("v","h"),main='Mosaic plot for Length and Transition to veganism')
+mosaic(Time_for_transition ~ Length_of_veganism, labeling = vcd::labeling_border(rot_labels = c(0, 45)), df,direction=c("v","h"),main='Mosaic Plot for Length and Transition to Vegan/Vegetarian Diet')
 ```
 
-Interestingly enough out of the participants that did not know how long they were vegan, They reported also taking 9+ years before transitioning.
+Unsurprisingly, out of the participants that did not know how long they were vegan, the majority also did not recall how long they took to transition. For all of the other Length of vegan/vegetarian diet categories, it seems that most participants were able to fully transition in 1-6 days. However, out of all of the individuals that took 1-6 days to transition, most only remained on the diet for 0-3 months. Out of the individuals that took more than a year to transition, much more remained on their diet for 9+ years. Overall, despite these interesting insights, there is not a clear association between time taken to transition and overall length of maintaining diet.
 
-## How Does Difficulty in Transition Opinions Differ Across Age Groups?
+## How Does Difficulty in Transition Responses Differ Across Age at Diet Adoption?
 ```{r}
 df <- read_csv("project_data/age_difficulty_during_transition.csv")
 df <- df[c("Age","difficulty_during_transition")]
 df$difficulty_during_transition <- as.factor(df$difficulty_during_transition)
 ggplot(df, aes(fct_infreq(difficulty_during_transition))) +
   geom_bar(color="darkgreen",fill = "palegreen3") + 
-  ggtitle("Age vs. Difficulty in Transition") +
+  ggtitle("Age at Adoption vs. Difficulty in Transition") +
   xlab("Opinion")+
   ylab("Count")+
   facet_wrap('Age') +
@@ -90,24 +90,35 @@ ggplot(df, aes(fct_infreq(difficulty_during_transition))) +
 Out of the individuals that selected 5 - most difficult during transition, those that fall between ages 20-40 make up the majority. They are also the same age group that reports higher counts of least difficulty transitioning. It could be due to the fact that most participants within this study belong within this age group followed by ages 0-20. The overall sample of data had fewer participants between ages 80-100, but within this age group, most reported the difficulty in transtion as neutral. The responses for this age group also seems to follow a close to normal distribution.
 
 
-## Age Distribution vs. How Long Before Fully Transitioned
+## Age at Adoption Distributions vs. Length of Maintaining Diet
 ```{r}
 df_inc_1 <- read_csv('project_data/inconvience_reasons.csv')
 df_trans <- read_csv("project_data/age_transition_length_new.csv")
 df_trans$Length_of_veganism <- factor(df_trans$Length_of_veganism, levels = c("0-3 months", "4-11 months", "1-2 years", "3-5 years", "6-9 years", "9 or more years","No idea"))
 df_trans$Time_for_transition <- factor(df_trans$Time_for_transition, levels = c("1-6 days", "1-3 weeks", "1-6 months", "7-12 months", "more than a year", "No idea"))
-ggplot(df_trans, aes(x=ALLAGEADOPTION, y=Length_of_veganism)) + geom_boxplot() + theme_grey(16) + ggtitle("Length of Diet & Age at Adoption Distribution") + xlab("Age")  + ylab("Length of Diet") + theme(text = element_text(size=9), legend.position = "none")
+ggplot(df_trans, aes(x=ALLAGEADOPTION, y=Length_of_veganism)) + 
+  geom_boxplot() + 
+  ggtitle("Age at Adoption Distributions vs. Length of Maintaining Diet") + 
+  xlab("Age")  + 
+  ylab("Length of Diet") + 
+  theme_grey(16) +
+  theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5))
 ```
 
-Out of those that remained on the plant-based diet for 6-9 and more than 9 years, the median ages were almost the same a little below 23 years at adoption. 
-Those that did not know had the largest age distribution, including for the participants that indicated remaining plant-based for 0-3 months. Those that maintained a plant-based diet of 9 or more years have a smaller age distribution ranging from 18 to just over 25 years of age with an outlier of age 75. 
+Out of those that remained on the plant-based diet for 6-9 and more than 9 years, the median ages were almost the same - a little below 23 years at adoption. Those that did not know had the largest age distribution, including for the participants that indicated remaining plant-based for 0-3 months. Those that maintained a plant-based diet of 9 or more years have a smaller age distribution ranging from 18 to just over 25 years of age with an outlier of age 75. Overall it appears that the age at adoption distribution widens and becomes more positively skewed as the length of diet maintenance decreases.
 
 ## What Are the Distributions for Age of Adoption Across Transition Time?
 ```{r}
-ggplot(df_trans, aes(x=ALLAGEADOPTION, y=Time_for_transition)) + geom_boxplot() + theme_grey(16) + ggtitle("How Long Before Transitioning & Participant Age Adoption Distributions") + xlab("Age")  + ylab("How Long before Fully Transitioned After Deciding") + theme(text = element_text(size=9), legend.position = "none")
+ggplot(df_trans, aes(x=ALLAGEADOPTION, y=Time_for_transition)) + 
+  geom_boxplot()  + 
+  ggtitle("How Long Before Transitioning & Participant Age Adoption Distributions") + 
+  xlab("Age")  + 
+  ylab("How Long before Fully Transitioned After Deciding") +
+  theme_grey(16) + 
+  theme(text = element_text(size=9), legend.position = "none",plot.title = element_text(hjust = 0.5))
 ```
 
-For the individuals that transitioned in 1-3 weeks, 1-6 months, and for more than a year, the median age is the same just above 25 years of age. 
+For the individuals that transitioned in 1-3 weeks, 1-6 months, and for more than a year, the median age is the same at about 27 years of age. Those that took 7-12 months to transition have an overall smaller distribution than the rest, with 3 outlier ages between ages 50 and 75. 
 
 
 ## What Are the Top 25 Cities With the Most Vegan/Vegetarian Restaurants?
@@ -151,8 +162,8 @@ df$Length <- factor(df$Length, levels = c("0-3 months", "4-11 months", "1-2 year
 df$Education = factor(df$Education, levels=c("Less than high school","High School","Some College","Bachelor's degree"))
 ggplot(df, aes(Length)) +
   geom_bar(color="darkgreen",fill = "palegreen3") + 
-  ggtitle("Relationship between education level and length of veganism") +
-  xlab("Length of veganism")+
+  ggtitle("Relationship Between Education Level and Length of Maintaining Diet") +
+  xlab("Length of Diet Maintenance")+
   ylab("Count")+
   facet_wrap('Education') +
   theme_grey(14) + 

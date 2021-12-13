@@ -46,13 +46,13 @@ fNdistinct(df)
 This data source was available at the [faunalytics](https://faunalytics.org/) website. A survey was conducted for almost 1500 people who have transitioned or begining to transition into a vegetarian/vegan. The dataset can be found [here](https://faunalytics.org/wp-content/uploads/2017/04/Faunalytics-Current-Former-Veg-Study-Dataset-4-Groups.sav) There a total of 1023 columns in this dataset. The survey was conducted for almost 1387 participants. People from different age groups were invited to take the survey. This survey also contains respondents from different states and cities in the United States. A survey instrument has also been provided to understand the questions in the survey and the respondents answers. The survey instrument can be found [here](https://faunalytics.org/wp-content/uploads/2016/01/Faunalytics-Current-Former-Veg-Study-Survey-Instrument.pdf). The data was made available in the .sav format. We have used the pyreadstat module in python to read the data.
 It also contains information about the following: 
 
-- reasons behind the adoption of veganism 
-- inconvienience that people are facing while transitioning or after the transition 
-- age of every individual in the survey 
-- health and taste concerns .
-- demographic information including religion, race etc
+- Reasons behind the adoption of vegan/vegetarian diet
+- Inconvenience factors that people are facing while transitioning or after the transition
+- Age at adoption of vegan/vegetarian diet for every individual in the survey 
+- Health and taste concerns .
+- Demographic information including race and religion.
 
-The data was stored in such a way that each idea was split into 5 different columns. For example, if one has to analyse the reasons behind the motivation of veganisim, we will be having 7 different columns for the same. For example, ANIMALPROTECTION, HEALTH, COST etc. Each column will tell us how much people agree or disagree to a particular reason. Based on the user's opinions, the responses where categorized as follows:
+The reasons behind the adoption of a vegan/vegetarian diet variables (i.e ANIMALPROTECTION, HEALTH, COST etc.) were designed as 5-point Likert scale response variables through which participants specify their level of agreement to a particular reason. The choices were as follows:
 
 - 1 - Strongly disagree
 - 2 - Disagree
@@ -69,8 +69,8 @@ df %>% kable(escape = FALSE) %>%
   scroll_box(width = "800px", height ="400px")
 ```
 
-The same pattern was used to capture Concerns, Reasons behind the motivation, Inconvienience reasons etc.
-The length and transitions variables are recorded as follows:
+The same Likert-scale format was used to capture inconvenience reasons and concerns.
+The variable that captures the length that an individual had maintained a vegan/vegetarian diet is recorded as follows:
 
 - 1 - "Up to 3 months"
 - 2 - "4–11 months"
@@ -86,8 +86,18 @@ Here is a snapshot of some categorical columns present in the data:
 df <- read_csv("project_data/Data_source_2.csv")
 df %>% kable(escape = FALSE) %>%
   kable_styling("striped", font_size = 9, full_width = FALSE) %>%
-  scroll_box(width = "400px", height ="400px")
+  scroll_box(width = "800px", height ="400px")
 ```
+
+We were also interested in the transition variables that indicates how long an individual take to fully transition into their vegan/vegetarian diet:
+
+- 1 - “1-6 days”
+- 2 - “4-11 months”
+- 3 - “1-2 years”
+- 4 - “3-5 years”
+- 5 - “6-10 years”
+- 6 - “More than 10 years”
+- 7 - “Don’t know
 
 
 The [SPSS syntax file](https://faunalytics.org/wp-content/uploads/2016/01/Faunalytics-Current-Former-Veg-Study-Syntax-4-Groups.sps) provides a detailed list of all the columns and a short description about each column. This file was used to understand each column in the dataframe.

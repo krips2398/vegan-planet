@@ -2,10 +2,11 @@
 
 ## Geospatial data
 
-We would like to visualize the spread of vegetarian restaurants across different states in the United States. So we extracted the coloumns called PROVINCE. We then used US state mapper to map the state names to its abbreviations which is in the data. We created a new data frame which contains only two columns - Province and the number of restaurants in each province. The columns have been renamed to region and value to be compatible to the library that we are going to use. 
+While utilizing the restaurant data from Datafiniti, we were interested in visualizing the spread of vegan/vegetarian restaurants across the US by state. We extracted the PROVINCE column to do so, and used the US state mapper to align state names to the abbreviations within the data. A new dataframe containing only the Province and the number of vegan/vegetarian restaurants was created. These columns were renamed to “region” and “value” to be compatible with the utilized library.
+
 
 ## Interactive component data.
-We have a total of 7 columns in the dataset which will say 1 if a person was motivated to adopt veganism for that particular else it would be 0. The same repeats for all other reasons. The reasons are as follows
+We designed the interactive component to display the counts of individuals that agreed to each level of the motivation variables (1- Strongly Disagree to 5-Strongly Agree). As a result we created a dataset isolating the seven motivations variables as columns, and re-coded the values to indicate 1 if a person was motivated, else 0. The reasons are as follows:
 
 - Animal Protection
 - Environment
@@ -17,14 +18,21 @@ We have a total of 7 columns in the dataset which will say 1 if a person was mot
 - Food Trends
 - Feeling of Disgust
 
-We derieved 5 columns for each of the above reasons. Value 1 says that the user strongly disagree. 2 indicates disagree. 3 suggests neither agree nor disagree. 4 suggests that the user agree. 5 means that they strongly agree.
-The counts for each reason and each column is taken into consideration.
+We derived 5 columns for each of the above reasons (according to Likert Scale levels 1-5). The counts for each reason and each column are taken into consideration.
+
 
 ## Cleaning of the categorical data.
 
-All the categorical data that we have is present in the form of opinions. So, we counted the occurence of each opinion based on different categorical variables. For example,  we count the number of users who agree with a particular reason that has caused inconvineince. We have been a scale of 1-5 to decide how much a person agrees and disagrees to a particular reason. But, we reduced the scale to 1-3. 1 suggest that the person disagrees to a particular reason. 3 suggests that a person agrees to a particular reason of inconvienience. 2 indicates that a person neither agrees nor disagrees to a particular reason. The counts for each inconvineince reason has been generated. Similar kind of mechanism is applied to Transition, Duration variables which represents the amount of time that one required to transition into a vegan and for how long they have been following a vegan diet.  
-Every column required for the analysis is decoded and renamed for convienience. For example, ALLINCONVENIENCE3D represents how much people agree and disagree with a concern. We would like the length of veganism for people who expressed this concern. So we transformed the data like below.
+Most of the data capturing participant opinions/experiences with a vegan/vegetarian diet is recorded as a categorical variable.
 
+All the categorical data that we have is present in the form of opinions. So, we counted the occurence of each opinion based on different categorical variables. For example,  we count the number of users who agree with a particular reason that has caused inconvineince. For the inconvenience variable, we decided to reduce the scale from 1-5 to 1-3 as follows:
+
+- 1 indicating Disagreement to reason of inconvenience
+- 2 indicating Neutral opinion (neither agree nor disagree)
+- 3 indicating Agreement to a particular reason of inconvenience
+
+We generated the counts for each inconvenience reason. We applied a similar approach to Transition and Length of diet variables which represent the amount of time that one required to transition and for how long they have been following their diet.
+Every column required for the analysis is decoded and renamed for convenience. For example, ALLINCONVENIENCE3D represents the total counts of people that indicated agreement in experience trouble finding vegan/vegetarian options at restaurants . For part of our analyses we were interested in how long people maintained a vegan/vegetarian diet for this particular concern. To extract this, we transformed the data as indicated below:
 ```{r}
 library(tidyverse)
 library(kableExtra)
