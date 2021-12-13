@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Motivation behind adoption of veganism</title>
+  <title>Bars - problem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <h1 style="text-align: center;">Motivation behind adoption of veganism</h1>
   <script
@@ -83,7 +83,7 @@ yAxis.append("text")
    .style(opts)
    .text("Count");
 // will hold the xAxis
-var xAxis = d3.select("section svg").append("g").classed("xAxis",true)
+var xAxis = d3.select("section svg").append("g").classed("xAxis",true);
 
 var drawBarChart = function(w,h) {
 //   d3.json("source.json", function(error, json) {
@@ -269,14 +269,9 @@ function getData() {
         'Social Justice World Hunger': [754, 233, 195, 124, 74],
         'Food Trends': [978, 166, 132, 64, 40],
         'Disgust': [592, 157, 186, 211, 234]
+   // d3.csv("https://github.com/krips2398/vegan-planet/blob/main/project_data/interactive_data.csv")
 };
 };
-const para = document.createElement("p");
-const node = document.createTextNode("This is new.");
-para.appendChild(node);
-const element = document.getElementById("div1");
-element.appendChild(para);
 </script>
-<div id="div1"></div>
 </body>
 </html>

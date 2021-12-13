@@ -19,5 +19,6 @@ how-many-vegetarian-restuarants-are-opened-from-2014-2018
 length-vs.-transition
 bar-plot
 number-of-restaurants-in-each-meteropolitian-city
+relation-difficulty-in-finding-the-restaurants-and-trouble-finding-restaurants
 interactive-component
 conclusion

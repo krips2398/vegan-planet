@@ -152,7 +152,7 @@ df_incondichot$ALLINCONVENIENCE3D <- as.factor(df_incondichot$ALLINCONVENIENCE3D
 mosaic(ALLLENGTH~ALLINCONVENIENCE3D, df_incondichot, direction=c("v","h"),main='Length of Diet & Trouble Finding Restaurants')
 ```
 
-# Number of restaurants in each meteropolitian city
+## Number of restaurants in each meteropolitian city
 ```{r}
 df <- read_csv("project_data/cities_and_restaurant_counts.csv")
 df <- df[1:25, ]
@@ -162,4 +162,13 @@ ggplot(data=df, aes(x=fct_reorder(city,-number_of_restaurants), y=number_of_rest
   xlab("City") +
   ylab("Number of restaurants") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1) ,plot.title = element_text(hjust = 0.5))
+```
+
+## Relation difficulty in finding the restaurants and trouble finding restaurants
+
+```{r}
+df <- read_csv("project_data/dicho_variables.csv")
+ggplot(data = df %>% gather(Variable, Count, -ALLLENGTH), 
+       aes(x = ALLLENGTH, y = Count, fill = Variable)) + 
+    geom_bar(stat = 'identity', position = 'dodge')
 ```
