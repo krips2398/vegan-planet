@@ -61,10 +61,11 @@ There are two noticeable peaks in vegetarian restaurant opening in October 2016 
 
 ## Is There A Relationship Between Time to Transition to Veganism & The Length of Time Mainting the Diet?
 ```{r fig.height=15, fig.width=15}
-df <- read_csv("project_data/age_transition_legth.csv")
+df <- read_csv("project_data/age_transition_length_new.csv")
 #df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
 #df$ALLLENGTH <- as.integer(df$ALLLENGTH)
-
+df$Length_of_veganism <- factor(df$Length_of_veganism, levels = c("0-3 months", "4-11 months", "1-2 years", "3-5 years", "6-9 years", "9 or more years","No idea"))
+df$Time_for_transition <- factor(df$Time_for_transition, levels = c("1-6 days", "1-3 weeks", "1-6 months", "7-12 months", "more than a year", "No idea"))
 mosaic(Time_for_transition ~ Length_of_veganism, labeling = vcd::labeling_border(rot_labels = c(0, 45)), df,direction=c("v","h"),main='Mosaic plot for Length and Transition to veganism')
 ```
 
@@ -93,6 +94,8 @@ Out of the individuals that selected 5 - most difficult during transition, those
 ```{r}
 df_inc_1 <- read_csv('project_data/inconvience_reasons.csv')
 df_trans <- read_csv("project_data/age_transition_length_new.csv")
+df_trans$Length_of_veganism <- factor(df_trans$Length_of_veganism, levels = c("0-3 months", "4-11 months", "1-2 years", "3-5 years", "6-9 years", "9 or more years","No idea"))
+df_trans$Time_for_transition <- factor(df_trans$Time_for_transition, levels = c("1-6 days", "1-3 weeks", "1-6 months", "7-12 months", "more than a year", "No idea"))
 ggplot(df_trans, aes(x=ALLAGEADOPTION, y=Length_of_veganism)) + geom_boxplot() + theme_grey(16) + ggtitle("Length of Diet & Age at Adoption Distribution") + xlab("Age")  + ylab("Length of Diet") + theme(text = element_text(size=9), legend.position = "none")
 ```
 Out of those that remained on the plant-based diet for 6-9 and more than 9 years, the median ages were almost the same a little below 23 years at adoption. 
@@ -124,7 +127,7 @@ Based on the graph, New York and Brooklyn had the highest counts of number of ve
 
 ```{r fig.height=10,fig.width=15}
 df <- read_csv("project_data/dicho_variables.csv")
-
+df$ALLLENGTH <- factor(df$ALLLENGTH, levels = c("0-3 months", "4-11 months", "1-2 years", "3-5 years", "6-9 years", "9 or more years","No idea"))
 df <- rename(df, "Difficulty in accessing health foods" = "ALLINCONVENIENCE4D")
 df <- rename(df, "Difficulty in finding vegetarian restaurants" = "ALLINCONVENIENCE3D")
 ggplot(data = df %>% gather(Concern, Count, -ALLLENGTH), aes(x = ALLLENGTH, y = Count, fill = Concern)) + 
@@ -136,13 +139,14 @@ ggplot(data = df %>% gather(Concern, Count, -ALLLENGTH), aes(x = ALLLENGTH, y = 
 ```
 Of those who maintained their dietary habits for 0-3 months, they also contribute to the highest counts of reporting difficulty accessing health foods and difficulty finding vegan/vegetarian options at restaurants. Both inconvenience issues seem to decline as the amount of time staying on the vegan/vegetarian diet increases. The chart may suggest that those that are able to maintain a vegan/vegeatrian diet for a longer period of time may be able to do so as access to health foods and options are not much of an inconvenience they are experiencing.
 
-## Education level and length of veganism
+## Does Education Level Influence Length of Vegan/Vegetarian Diet?
 
-```{r}
+```{r message=FALSE,warning=FALSE}
 df <- read_csv("project_data/education_data_new.csv")
 df <- df[c("Education","Length")]
-df$Length <- as.factor(df$Length)
-ggplot(df, aes(fct_infreq(Length))) +
+df$Length <- factor(df$Length, levels = c("0-3 months", "4-11 months", "1-2 years", "3-5 years", "6-9 years", "9 or more"))
+df$Education = factor(df$Education, levels=c("Less than high school","High School","Some College","Bachelor's degree"))
+ggplot(df, aes(Length)) +
   geom_bar(color="darkgreen",fill = "palegreen3") + 
   ggtitle("Relationship between education level and length of veganism") +
   xlab("Length of veganism")+
@@ -152,3 +156,4 @@ ggplot(df, aes(fct_infreq(Length))) +
   theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 90))
 
 ```
+It does seem that with additional education, there are higher counts of observations as length of vegan/vegetarian diet increases. Overall, most of the participants within this sample obtained a Bachelors degree with fewest having completed less than high school. Out of the individuals that maintained their diet from 6-9 and more than 9 years, ~150 obtained a bachelors degree, with a little over 75 completed some college, with much less than ~40 for high school and less than high school.
