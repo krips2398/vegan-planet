@@ -130,8 +130,25 @@ df <- rename(df, "Difficulty in finding vegetarian restaurants" = "ALLINCONVENIE
 ggplot(data = df %>% gather(Concern, Count, -ALLLENGTH), aes(x = ALLLENGTH, y = Count, fill = Concern)) + 
     geom_bar(stat = 'identity', position = 'dodge') +
     xlab("Length of veganism") + 
-    theme_grey(14) +
+    theme_grey(16) +
     theme(axis.text.x = element_text(angle = 90))
     
 ```
 Of those who maintained their dietary habits for 0-3 months, they also contribute to the highest counts of reporting difficulty accessing health foods and difficulty finding vegan/vegetarian options at restaurants. Both inconvenience issues seem to decline as the amount of time staying on the vegan/vegetarian diet increases. The chart may suggest that those that are able to maintain a vegan/vegeatrian diet for a longer period of time may be able to do so as access to health foods and options are not much of an inconvenience they are experiencing.
+
+## Education level and length of veganism
+
+```{r}
+df <- read_csv("project_data/education_data_new.csv")
+df <- df[c("Education","Length")]
+df$Length <- as.factor(df$Length)
+ggplot(df, aes(fct_infreq(Length))) +
+  geom_bar(color="darkgreen",fill = "palegreen3") + 
+  ggtitle("Relationship between education level and length of veganism") +
+  xlab("Length of veganism")+
+  ylab("Count")+
+  facet_wrap('Education') +
+  theme_grey(14) + 
+  theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 90))
+
+```

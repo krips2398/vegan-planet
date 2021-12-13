@@ -1,0 +1,22 @@
+Education,Length,Count
+Less than high school,0-3 months,6
+Less than high school,1-2 years,2
+Less than high school,3-5 years,2
+High School,0-3 months,32
+High School,4-11 months,18
+High School,1-2 years,19
+High School,3-5 years,5
+High School,6-9 years,6
+High School,9 or more,18
+Some College,0-3 months,99
+Some College,4-11 months,64
+Some College,1-2 years,61
+Some College,3-5 years,37
+Some College,6-9 years,26
+Some College,9 or more,49
+Bachelor's degree,0-3 months,244
+Bachelor's degree,4-11 months,145
+Bachelor's degree,1-2 years,133
+Bachelor's degree,3-5 years,81
+Bachelor's degree,6-9 years,47
+Bachelor's degree,9 or more,125

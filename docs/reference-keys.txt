@@ -22,5 +22,6 @@ age-distribution-vs.-how-long-before-fully-transitioned
 what-are-the-distributions-for-age-of-adoption-across-transition-time
 what-are-the-top-25-cities-with-the-most-veganvegetarian-restaurants
 is-there-a-relationship-between-length-of-maintaining-veganvegetarian-diet-and-access-to-health-foods-veganvegetarian-restaurant-options
+education-level-and-length-of-veganism
 interactive-component
 conclusion
