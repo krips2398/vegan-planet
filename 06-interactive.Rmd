@@ -1,6 +1,6 @@
 # Interactive component
 
-<a href="06-barchart.html">Click to see the interactive component in full size</a>
+<a href="barchart.html">Click to see the interactive component in full size</a>
 
 An interactive component has been made to quickly understand the motivations behind the adoption of veganism. We have analysed 10 major reasons behind the adoption of veganism namely:
 
