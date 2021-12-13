@@ -9,7 +9,7 @@ library(choroplethr)
 library(vcd)
 ```
 
-## Inconvience because of veganism
+## How Many Individuals Reported Agree, Disagree, or Neutral for Each of the Vegan/Vegetarian Inconvenience Reasons?
 ```{r fig.height=10,fig.width=15}
 df <- read_csv('project_data/inconvience_reasons.csv')
 tidydf <- df %>%
@@ -20,7 +20,7 @@ ggplot(
           fct_reorder2(reason, opinion=="Disagree", Counts, .desc = FALSE),
           color = opinion)) +
       geom_point(aes(size=1)) + 
-      ggtitle("Inconvience because of veganism") +
+      ggtitle("Inconvenience because of veganism") +
       ylab("") +
       theme_grey(16) +
       theme(plot.title = element_text(hjust = 0.5)) +
@@ -29,14 +29,17 @@ ggplot(
 options(repr.P.width=4,repr.P.height=10)
 ```
 
-## Number of restuarants in each region
+Within this dataset, we notice that there is a higher count of individuals that disagreed with the specified inconvenience reasons for a plant-based diet, except for the "no restaruarnts for grab n go". Out of all of the inconvenience reasons, "diffifult during time of transitino" and "time consuming" had the highest counts of agreement from participants of the survey, while having to prepare both vegetarian and non-vegetarian foods had the least counts of agreements amongst participants. 
+
+## What is Vegan/Vegetarian Restaurant Count Density Across the US?
 ```{r fig.height=10, fig.width=10}
 df_state <- read.csv("project_data/states_grouped_1.csv")
-state_choropleth(df_state, title = "Number of Vegetarian restaurants in every state", legend="Counts") + scale_fill_brewer(palette=2)
+state_choropleth(df_state, title = "Number of Vegetarian restaurants in every state", legend="Counts") + 
+  scale_fill_brewer(palette=2)
 ```
+The states with the highest number of plant-based restaurants include states in the north east such as NY, PA, and MA with OH - including TX and CA in the west and FL in the South east region of the country. States with the fewest counts of plant-based restaurants include states located in teh Pacific Northwest such as ID, MT, WY, and the Dakotas. Overall, North East region of the United States has the most number of vegetarian restaurants. 
 
-
-## How many vegetarian restuarants are opened from 2014-2018
+##  How Many Vegan/Vegetarian Restaurants Opened Over Time? Are There ANy Noticeable Trends?
 
 ```{r}
 df <- read_csv('project_data/timeseries_opening_of_restuarants.csv')
@@ -50,26 +53,31 @@ ggplot(df, aes(date, counts, group = 1)) +
          geom_line(colour="black") +
          geom_smooth(method ="loess",span = .3,se=FALSE, color="darkgreen") +
          scale_x_date(date_breaks = "3 month", date_labels = "%b %y") +
-         labs(x = "Date", y = "Number of Vegetarain restaurants", title = "Number of Vegetarian restaurants opened over time")
+         labs(x = "Month and Year", y = "Number of Vegetarain restaurants", title = "Vegetarian restaurants opened over time") +
+         theme(plot.title = element_text(hjust = 0.5))
 ```
 
-## Length vs. Transition
-```{r fig.height=10, fig.width=10}
+There are two noticeable peaks in vegetarian restaurant opening in October 2016 and in April of 2017. However, based on this dataset the largest uptick in vegetarian restaurant openings happened from April 2017 to ~ July 2017. It would be interesting to investigatge the factors taht led to this large uptick in vegetarian restaurants opening and the locations in which they occured throughout the United States. from July 2016 to ~March 2017 restaurant opening reached a low plateau.
+
+## Is There A Relationship Between Time to Transition to Veganism & The Length of Time Mainting the Diet?
+```{r fig.height=15, fig.width=15}
 df <- read_csv("project_data/age_transition_legth.csv")
 #df$ALLTRANSITION <- as.integer(df$ALLTRANSITION)
 #df$ALLLENGTH <- as.integer(df$ALLLENGTH)
 
-mosaic(Time_for_transition ~ Length_of_veganism, labeling = vcd::labeling_border(rot_labels = c(0, 0)), df, direction=c("v","h"),main='Mosaic plot for Length and Transition to veganism')
+mosaic(Time_for_transition ~ Length_of_veganism, labeling = vcd::labeling_border(rot_labels = c(0, 45)), df,direction=c("v","h"),main='Mosaic plot for Length and Transition to veganism')
 ```
 
-## Bar plot
+Interestingly enough out of the participants that did not know how long they were vegan, They reported also taking 9+ years before transitioning.
+
+## How Does Difficulty in Transition Opinions Differ Across Age Groups?
 ```{r}
 df <- read_csv("project_data/age_difficulty_during_transition.csv")
 df <- df[c("Age","difficulty_during_transition")]
 df$difficulty_during_transition <- as.factor(df$difficulty_during_transition)
 ggplot(df, aes(fct_infreq(difficulty_during_transition))) +
   geom_bar(color="darkgreen",fill = "palegreen3") + 
-  ggtitle("What age group is facing a lot of difficulty during transition") +
+  ggtitle("Age vs. Difficulty in Transition") +
   xlab("Opinion")+
   ylab("Count")+
   facet_wrap('Age') +
@@ -77,82 +85,28 @@ ggplot(df, aes(fct_infreq(difficulty_during_transition))) +
   theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5))
 ```
 
+Out of the individuals that selected 5 - most difficult during transition, those that fall between ages 20-40 make up the majority. They are also the same age group that reports higher counts of least difficulty transitioning. It could be due to the fact that most participants within this study belong within this age group followed by ages 0-20. The overall sample of data had fewer participants between ages 80-100, but within this age group, most reported the difficulty in transtion as neutral. The responses for this age group also seems to follow a close to normal distribution.
+
+
+
+## Age Distribution vs. How Long Before Fully Transitioned
 ```{r}
-df_inc <- read_csv("project_data/age_difficulty_during_transition.csv")
-df_inc
 df_inc_1 <- read_csv('project_data/inconvience_reasons.csv')
+df_trans <- read_csv("project_data/age_transition_length_new.csv")
+ggplot(df_trans, aes(x=ALLAGEADOPTION, y=Length_of_veganism)) + geom_boxplot() + theme_grey(16) + ggtitle("Length of Diet & Age at Adoption Distribution") + xlab("Age")  + ylab("Length of Diet") + theme(text = element_text(size=9), legend.position = "none")
 ```
+Out of those that remained on the plant-based diet for 6-9 and more than 9 years, the median ages were almost the same a little below 23 years at adoption. 
+Those that did not know had the largest age distribution, including for the participants that indicated remaining plant-based for 0-3 months. Those that maintained a plant-based diet of 9 or more years have a smaller age distribution ranging from 18 to just over 25 years of age with an outlier of age 75. 
 
+## What Are the Distributions for Age of Adoption Across Transition Time?
 ```{r}
-df_trans <- read_csv("project_data/age_transition_variables_not_modified.csv")
-df_trans
+ggplot(df_trans, aes(x=ALLAGEADOPTION, y=Time_for_transition)) + geom_boxplot() + theme_grey(16) + ggtitle("How Long Before Transitioning & Participant Age Adoption Distributions") + xlab("Age")  + ylab("How Long before Fully Transitioned After Deciding") + theme(text = element_text(size=9), legend.position = "none")
 ```
 
-```{r}
-sapply(df_trans, class)
-```
+For the individuals that transitioned in 1-3 weeks, 1-6 months, and for more than a year, the median age is the same just above 25 years of age. 
 
 
-```{r}
-df_trans$ALLTRANSITION <- as.factor(df_trans$ALLTRANSITION)
-```
-```{r}
-df_trans$ALLTRANSITION <- as.factor(df_trans$ALLTRANSITION)
-ggplot(df_trans, aes(x=ALLAGEADOPTION, y=ALLTRANSITION)) + geom_boxplot() + theme_grey(16) + ggtitle(" Summary of loan amounts for each level of loan purpose") + xlab("Age")  + ylab("How Long before Fully Transitioned After Deciding") + theme(text = element_text(size=9), legend.position = "none")
-```
-
-```{r}
-df_trans$ALLLENGTH <- as.factor(df_trans$ALLLENGTH)
-ggplot(df_trans, aes(x=ALLAGEADOPTION, y=ALLLENGTH)) + geom_boxplot() + theme_grey(16) + ggtitle(" Summary of loan amounts for each level of loan purpose") + xlab("Age")  + ylab("Length of Diet") + theme(text = element_text(size=9), legend.position = "none")
-```
-
-```{r}
-df_veg_reasons <- read_csv("project_data/reasons_for_veganism.csv")
-df_veg_reasons
-```
-
-```{r}
-df_veg_merged <- merge(df_trans, df_veg_reasons, by = "id")
-df_veg_merged
-```
-
-```{r}
-chosen_cols <- c("ALLTRANSITION","ALLLENGTH", "ALLANIMALPROTECTION",
-                 "ALLENVIRONMENT", "ALLCOST","ALLHEALTH",
-                 "ALLRELIGIOUSSPIRITUAL", "ALLSOCIALINFLUENCE",
-                 "ALLSOCIALJUSTICEWORLDHUNGER", "ALLFOODTREND",
-                 "ALLDISGUST")
-df_veg_merged[chosen_cols] <- lapply(df_veg_merged[chosen_cols], factor)
-                 
-#df_pivoted <- df_veg_merged %>%
-  #pivot_longer(everything(), manes_to = "")
-ggplot(df_veg_merged, aes(x=ALLTRANSITION)) +
-  geom_bar(color="darkgreen",fill = "palegreen3") + 
-  ggtitle("Length to Transition vs. Length of Overall Diet") +
-  xlab("How Long Partitipants took to Transition")+
-  ylab("Count")+
-  facet_wrap('ALLLENGTH') +
-  theme_grey(14) + 
-  theme(text = element_text(size=9), legend.position = "none", plot.title = element_text(hjust = 0.5))
-```
-
-
-```{r}
-df_incondichot <- read_csv('project_data/inconvenience_dichot.csv')
-df_incondichot
-
-
-df_incondichot$ALLINCONVENIENCE4D <- as.factor(df_incondichot$ALLINCONVENIENCE4D)
-df_incondichot$ALLLENGTH <- as.integer(df_incondichot$ALLLENGTH)
-mosaic(ALLLENGTH~ALLINCONVENIENCE4D, df_incondichot, direction=c("v","h"),main='Length of Diet & Difficulty Accessing Health Foods')
-```
-
-```{r}
-df_incondichot$ALLINCONVENIENCE3D <- as.factor(df_incondichot$ALLINCONVENIENCE3D)
-mosaic(ALLLENGTH~ALLINCONVENIENCE3D, df_incondichot, direction=c("v","h"),main='Length of Diet & Trouble Finding Restaurants')
-```
-
-## Number of restaurants in each meteropolitian city
+## What Are the Top 25 Cities With the Most Vegan/Vegetarian Restaurants?
 ```{r}
 df <- read_csv("project_data/cities_and_restaurant_counts.csv")
 df <- df[1:25, ]
@@ -163,12 +117,21 @@ ggplot(data=df, aes(x=fct_reorder(city,-number_of_restaurants), y=number_of_rest
   ylab("Number of restaurants") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1) ,plot.title = element_text(hjust = 0.5))
 ```
+Based on the graph, New York and Brooklyn had the highest counts of number of vegetarian restaurants of 25 top cities - with over 300 and 200 restaurants respectively. Orlando had the lowest number of vegetarian restaurants with approximately 50, and with Boston, Cincinnati and Cleveland having slightly more than 50 restaurants.
 
-## Relation difficulty in finding the restaurants and trouble finding restaurants
 
-```{r}
+## Is There a Relationship Between Length of Maintaining Vegan/Vegetarian Diet and Access to Health Foods & Vegan/Vegetarian Restaurant Options?
+
+```{r fig.height=10,fig.width=15}
 df <- read_csv("project_data/dicho_variables.csv")
-ggplot(data = df %>% gather(Variable, Count, -ALLLENGTH), 
-       aes(x = ALLLENGTH, y = Count, fill = Variable)) + 
-    geom_bar(stat = 'identity', position = 'dodge')
+
+df <- rename(df, "Difficulty in accessing health foods" = "ALLINCONVENIENCE4D")
+df <- rename(df, "Difficulty in finding vegetarian restaurants" = "ALLINCONVENIENCE3D")
+ggplot(data = df %>% gather(Concern, Count, -ALLLENGTH), aes(x = ALLLENGTH, y = Count, fill = Concern)) + 
+    geom_bar(stat = 'identity', position = 'dodge') +
+    xlab("Length of veganism") + 
+    theme_grey(14) +
+    theme(axis.text.x = element_text(angle = 90))
+    
 ```
+Of those who maintained their dietary habits for 0-3 months, they also contribute to the highest counts of reporting difficulty accessing health foods and difficulty finding vegan/vegetarian options at restaurants. Both inconvenience issues seem to decline as the amount of time staying on the vegan/vegetarian diet increases. The chart may suggest that those that are able to maintain a vegan/vegeatrian diet for a longer period of time may be able to do so as access to health foods and options are not much of an inconvenience they are experiencing.
